@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="ERROR">
+    <!--log4j2日志框架追踪等级-->
+    <properties>
+        <!--<property name="LOG_HOME">D:/wxmaFrontAPI/logs</property>-->
+        <!--<property name="LOG_HOME">/home/tclab/logs/frontLogs</property>-->
+        <!--<property name="LOG_HOME">/home/tclab/logs/backLogs</property>-->
+        <property name="LOG_HOME">/home/tclab/logs/ImfrontLogs</property>
+        <property name="FILE_NAME">imLog</property>
+        <property name="log.sql.level">info</property>
+    </properties>
+
+
+    <Appenders>
+
+        <!--控制台输出-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--输出格式-->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %l - %msg%n" />
+        </Console>
+
+        <!--输出源-->
+        <RollingRandomAccessFile
+                name="RollingRandomAccessFile"
+                immediateFlush="true"
+                fileName="${LOG_HOME}/${FILE_NAME}.log"
+                filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}.%d{yyyy-MM-dd}.log.gz">
+            <!--输出格式-->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %M -- %msg%xEx%n"/>
+            <Policies>
+                <!--按天输出日志-->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <!--控制日志个数最多20个-->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <!--根日志器-->
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="RollingRandomAccessFile" />
+        </Root>
+
+        <!--自定义日志器-->
+        <Logger name="org.springframework" level="${log.sql.level}" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="RollingRandomAccessFile" />
+        </Logger>
+
+        <!--项目日志器-->
+        <Logger name="com.tclab" level="${log.sql.level}" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="RollingRandomAccessFile" />
+        </Logger>
+
+        <!--数据库日志器-->
+        <!--<logger name="druid.sql.Statement" level="debug" additivity="false">-->
+            <!--<appender-ref ref="Console"/>-->
+            <!--<AppenderRef ref="RollingRandomAccessFile" />-->
+        <!--</logger>-->
+        <!--<logger name="druid.sql.ResultSet" level="debug" additivity="false">-->
+            <!--<appender-ref ref="Console"/>-->
+            <!--<AppenderRef ref="RollingRandomAccessFile" />-->
+        <!--</logger>-->
+
+    </Loggers>
+
+</Configuration>

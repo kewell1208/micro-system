@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletGoodProcessLogMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletGoodProcessLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="participant_id" jdbcType="INTEGER" property="participantId" />
+    <result column="participant_name" jdbcType="VARCHAR" property="participantName" />
+    <result column="participant_phone" jdbcType="VARCHAR" property="participantPhone" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="good_no" jdbcType="VARCHAR" property="goodNo" />
+    <result column="good_last_status" jdbcType="INTEGER" property="goodLastStatus" />
+    <result column="good_current_status" jdbcType="INTEGER" property="goodCurrentStatus" />
+    <result column="process_remark" jdbcType="VARCHAR" property="processRemark" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, user_name, user_phone, participant_id, participant_name, participant_phone, 
+    order_no, good_no, good_last_status, good_current_status, process_remark, create_date, 
+    update_date
+  </sql>
+  <select id="selectByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodProcessLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from applet_good_process_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applet_good_process_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_good_process_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodProcessLogExample">
+    delete from applet_good_process_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodProcessLog">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_good_process_log (user_id, user_name, user_phone, 
+      participant_id, participant_name, participant_phone, 
+      order_no, good_no, good_last_status, 
+      good_current_status, process_remark, create_date, 
+      update_date)
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{participantId,jdbcType=INTEGER}, #{participantName,jdbcType=VARCHAR}, #{participantPhone,jdbcType=VARCHAR}, 
+      #{orderNo,jdbcType=VARCHAR}, #{goodNo,jdbcType=VARCHAR}, #{goodLastStatus,jdbcType=INTEGER}, 
+      #{goodCurrentStatus,jdbcType=INTEGER}, #{processRemark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodProcessLog">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_good_process_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="participantId != null">
+        participant_id,
+      </if>
+      <if test="participantName != null">
+        participant_name,
+      </if>
+      <if test="participantPhone != null">
+        participant_phone,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="goodNo != null">
+        good_no,
+      </if>
+      <if test="goodLastStatus != null">
+        good_last_status,
+      </if>
+      <if test="goodCurrentStatus != null">
+        good_current_status,
+      </if>
+      <if test="processRemark != null">
+        process_remark,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="participantId != null">
+        #{participantId,jdbcType=INTEGER},
+      </if>
+      <if test="participantName != null">
+        #{participantName,jdbcType=VARCHAR},
+      </if>
+      <if test="participantPhone != null">
+        #{participantPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodNo != null">
+        #{goodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodLastStatus != null">
+        #{goodLastStatus,jdbcType=INTEGER},
+      </if>
+      <if test="goodCurrentStatus != null">
+        #{goodCurrentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="processRemark != null">
+        #{processRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodProcessLogExample" resultType="java.lang.Long">
+    select count(*) from applet_good_process_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_good_process_log
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null">
+        user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantId != null">
+        participant_id = #{record.participantId,jdbcType=INTEGER},
+      </if>
+      <if test="record.participantName != null">
+        participant_name = #{record.participantName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantPhone != null">
+        participant_phone = #{record.participantPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNo != null">
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodNo != null">
+        good_no = #{record.goodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodLastStatus != null">
+        good_last_status = #{record.goodLastStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodCurrentStatus != null">
+        good_current_status = #{record.goodCurrentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.processRemark != null">
+        process_remark = #{record.processRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_good_process_log
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      participant_id = #{record.participantId,jdbcType=INTEGER},
+      participant_name = #{record.participantName,jdbcType=VARCHAR},
+      participant_phone = #{record.participantPhone,jdbcType=VARCHAR},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      good_no = #{record.goodNo,jdbcType=VARCHAR},
+      good_last_status = #{record.goodLastStatus,jdbcType=INTEGER},
+      good_current_status = #{record.goodCurrentStatus,jdbcType=INTEGER},
+      process_remark = #{record.processRemark,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodProcessLog">
+    update applet_good_process_log
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="participantId != null">
+        participant_id = #{participantId,jdbcType=INTEGER},
+      </if>
+      <if test="participantName != null">
+        participant_name = #{participantName,jdbcType=VARCHAR},
+      </if>
+      <if test="participantPhone != null">
+        participant_phone = #{participantPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodNo != null">
+        good_no = #{goodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodLastStatus != null">
+        good_last_status = #{goodLastStatus,jdbcType=INTEGER},
+      </if>
+      <if test="goodCurrentStatus != null">
+        good_current_status = #{goodCurrentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="processRemark != null">
+        process_remark = #{processRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodProcessLog">
+    update applet_good_process_log
+    set user_id = #{userId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      participant_id = #{participantId,jdbcType=INTEGER},
+      participant_name = #{participantName,jdbcType=VARCHAR},
+      participant_phone = #{participantPhone,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      good_no = #{goodNo,jdbcType=VARCHAR},
+      good_last_status = #{goodLastStatus,jdbcType=INTEGER},
+      good_current_status = #{goodCurrentStatus,jdbcType=INTEGER},
+      process_remark = #{processRemark,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletPackageMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletPackage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="package_id" jdbcType="VARCHAR" property="packageId" />
+    <result column="lab_code" jdbcType="VARCHAR" property="labCode" />
+    <result column="package_name" jdbcType="VARCHAR" property="packageName" />
+    <result column="package_logo" jdbcType="VARCHAR" property="packageLogo" />
+    <result column="package_info" jdbcType="VARCHAR" property="packageInfo" />
+    <result column="package_label" jdbcType="VARCHAR" property="packageLabel" />
+    <result column="package_recommendation" jdbcType="INTEGER" property="packageRecommendation" />
+    <result column="package_priority" jdbcType="INTEGER" property="packagePriority" />
+    <result column="package_catalog_id" jdbcType="VARCHAR" property="packageCatalogId" />
+    <result column="package_message" jdbcType="VARCHAR" property="packageMessage" />
+    <result column="package_purpose_id" jdbcType="VARCHAR" property="packagePurposeId" />
+    <result column="package_population_id" jdbcType="VARCHAR" property="packagePopulationId" />
+    <result column="population_name" jdbcType="VARCHAR" property="populationName" />
+    <result column="package_source_id" jdbcType="VARCHAR" property="packageSourceId" />
+    <result column="package_source_name" jdbcType="VARCHAR" property="packageSourceName" />
+    <result column="package_remark" jdbcType="VARCHAR" property="packageRemark" />
+    <result column="package_prime_price" jdbcType="DECIMAL" property="packagePrimePrice" />
+    <result column="package_current_price" jdbcType="DECIMAL" property="packageCurrentPrice" />
+    <result column="package_status" jdbcType="INTEGER" property="packageStatus" />
+    <result column="package_collect_type" jdbcType="INTEGER" property="packageCollectType" />
+    <result column="package_sample_pic" jdbcType="VARCHAR" property="packageSamplePic" />
+    <result column="package_step" jdbcType="CHAR" property="packageStep" />
+    <result column="package_report_type" jdbcType="INTEGER" property="packageReportType" />
+    <result column="package_report_charge" jdbcType="DECIMAL" property="packageReportCharge" />
+    <result column="package_report_time" jdbcType="VARCHAR" property="packageReportTime" />
+    <result column="report_time_desc" jdbcType="VARCHAR" property="reportTimeDesc" />
+    <result column="sample_type_name" jdbcType="VARCHAR" property="sampleTypeName" />
+    <result column="sample_type" jdbcType="INTEGER" property="sampleType" />
+    <result column="package_special_requirement" jdbcType="VARCHAR" property="packageSpecialRequirement" />
+    <result column="package_equipment" jdbcType="VARCHAR" property="packageEquipment" />
+    <result column="storage_condition" jdbcType="VARCHAR" property="storageCondition" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="test_object_id" jdbcType="VARCHAR" property="testObjectId" />
+    <result column="clinical_significance" jdbcType="VARCHAR" property="clinicalSignificance" />
+    <result column="lab_group" jdbcType="VARCHAR" property="labGroup" />
+    <result column="price_code" jdbcType="VARCHAR" property="priceCode" />
+    <result column="pdf_num" jdbcType="INTEGER" property="pdfNum" />
+    <result column="logo_form" jdbcType="INTEGER" property="logoForm" />
+    <result column="package_type" jdbcType="INTEGER" property="packageType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, package_id, lab_code, package_name, package_logo, package_info, package_label, 
+    package_recommendation, package_priority, package_catalog_id, package_message, package_purpose_id, 
+    package_population_id, population_name, package_source_id, package_source_name, package_remark, 
+    package_prime_price, package_current_price, package_status, package_collect_type, 
+    package_sample_pic, package_step, package_report_type, package_report_charge, package_report_time, 
+    report_time_desc, sample_type_name, sample_type, package_special_requirement, package_equipment, 
+    storage_condition, del_flag, create_date, update_date, test_object_id, clinical_significance, 
+    lab_group, price_code, pdf_num, logo_form, package_type
+  </sql>
+  <select id="selectByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletPackageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from applet_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applet_package
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_package
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletPackageExample">
+    delete from applet_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletPackage">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_package (package_id, lab_code, package_name, 
+      package_logo, package_info, package_label, 
+      package_recommendation, package_priority, 
+      package_catalog_id, package_message, package_purpose_id, 
+      package_population_id, population_name, package_source_id, 
+      package_source_name, package_remark, package_prime_price, 
+      package_current_price, package_status, package_collect_type, 
+      package_sample_pic, package_step, package_report_type, 
+      package_report_charge, package_report_time, 
+      report_time_desc, sample_type_name, sample_type, 
+      package_special_requirement, package_equipment, 
+      storage_condition, del_flag, create_date, 
+      update_date, test_object_id, clinical_significance, 
+      lab_group, price_code, pdf_num, 
+      logo_form, package_type)
+    values (#{packageId,jdbcType=VARCHAR}, #{labCode,jdbcType=VARCHAR}, #{packageName,jdbcType=VARCHAR}, 
+      #{packageLogo,jdbcType=VARCHAR}, #{packageInfo,jdbcType=VARCHAR}, #{packageLabel,jdbcType=VARCHAR}, 
+      #{packageRecommendation,jdbcType=INTEGER}, #{packagePriority,jdbcType=INTEGER}, 
+      #{packageCatalogId,jdbcType=VARCHAR}, #{packageMessage,jdbcType=VARCHAR}, #{packagePurposeId,jdbcType=VARCHAR}, 
+      #{packagePopulationId,jdbcType=VARCHAR}, #{populationName,jdbcType=VARCHAR}, #{packageSourceId,jdbcType=VARCHAR}, 
+      #{packageSourceName,jdbcType=VARCHAR}, #{packageRemark,jdbcType=VARCHAR}, #{packagePrimePrice,jdbcType=DECIMAL}, 
+      #{packageCurrentPrice,jdbcType=DECIMAL}, #{packageStatus,jdbcType=INTEGER}, #{packageCollectType,jdbcType=INTEGER}, 
+      #{packageSamplePic,jdbcType=VARCHAR}, #{packageStep,jdbcType=CHAR}, #{packageReportType,jdbcType=INTEGER}, 
+      #{packageReportCharge,jdbcType=DECIMAL}, #{packageReportTime,jdbcType=VARCHAR}, 
+      #{reportTimeDesc,jdbcType=VARCHAR}, #{sampleTypeName,jdbcType=VARCHAR}, #{sampleType,jdbcType=INTEGER}, 
+      #{packageSpecialRequirement,jdbcType=VARCHAR}, #{packageEquipment,jdbcType=VARCHAR}, 
+      #{storageCondition,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{testObjectId,jdbcType=VARCHAR}, #{clinicalSignificance,jdbcType=VARCHAR}, 
+      #{labGroup,jdbcType=VARCHAR}, #{priceCode,jdbcType=VARCHAR}, #{pdfNum,jdbcType=INTEGER}, 
+      #{logoForm,jdbcType=INTEGER}, #{packageType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tclab.weixinappletservice.pojo.AppletPackage">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_package
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="packageId != null">
+        package_id,
+      </if>
+      <if test="labCode != null">
+        lab_code,
+      </if>
+      <if test="packageName != null">
+        package_name,
+      </if>
+      <if test="packageLogo != null">
+        package_logo,
+      </if>
+      <if test="packageInfo != null">
+        package_info,
+      </if>
+      <if test="packageLabel != null">
+        package_label,
+      </if>
+      <if test="packageRecommendation != null">
+        package_recommendation,
+      </if>
+      <if test="packagePriority != null">
+        package_priority,
+      </if>
+      <if test="packageCatalogId != null">
+        package_catalog_id,
+      </if>
+      <if test="packageMessage != null">
+        package_message,
+      </if>
+      <if test="packagePurposeId != null">
+        package_purpose_id,
+      </if>
+      <if test="packagePopulationId != null">
+        package_population_id,
+      </if>
+      <if test="populationName != null">
+        population_name,
+      </if>
+      <if test="packageSourceId != null">
+        package_source_id,
+      </if>
+      <if test="packageSourceName != null">
+        package_source_name,
+      </if>
+      <if test="packageRemark != null">
+        package_remark,
+      </if>
+      <if test="packagePrimePrice != null">
+        package_prime_price,
+      </if>
+      <if test="packageCurrentPrice != null">
+        package_current_price,
+      </if>
+      <if test="packageStatus != null">
+        package_status,
+      </if>
+      <if test="packageCollectType != null">
+        package_collect_type,
+      </if>
+      <if test="packageSamplePic != null">
+        package_sample_pic,
+      </if>
+      <if test="packageStep != null">
+        package_step,
+      </if>
+      <if test="packageReportType != null">
+        package_report_type,
+      </if>
+      <if test="packageReportCharge != null">
+        package_report_charge,
+      </if>
+      <if test="packageReportTime != null">
+        package_report_time,
+      </if>
+      <if test="reportTimeDesc != null">
+        report_time_desc,
+      </if>
+      <if test="sampleTypeName != null">
+        sample_type_name,
+      </if>
+      <if test="sampleType != null">
+        sample_type,
+      </if>
+      <if test="packageSpecialRequirement != null">
+        package_special_requirement,
+      </if>
+      <if test="packageEquipment != null">
+        package_equipment,
+      </if>
+      <if test="storageCondition != null">
+        storage_condition,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="testObjectId != null">
+        test_object_id,
+      </if>
+      <if test="clinicalSignificance != null">
+        clinical_significance,
+      </if>
+      <if test="labGroup != null">
+        lab_group,
+      </if>
+      <if test="priceCode != null">
+        price_code,
+      </if>
+      <if test="pdfNum != null">
+        pdf_num,
+      </if>
+      <if test="logoForm != null">
+        logo_form,
+      </if>
+      <if test="packageType != null">
+        package_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="packageId != null">
+        #{packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="labCode != null">
+        #{labCode,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null">
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="packageLogo != null">
+        #{packageLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="packageInfo != null">
+        #{packageInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="packageLabel != null">
+        #{packageLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="packageRecommendation != null">
+        #{packageRecommendation,jdbcType=INTEGER},
+      </if>
+      <if test="packagePriority != null">
+        #{packagePriority,jdbcType=INTEGER},
+      </if>
+      <if test="packageCatalogId != null">
+        #{packageCatalogId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageMessage != null">
+        #{packageMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="packagePurposeId != null">
+        #{packagePurposeId,jdbcType=VARCHAR},
+      </if>
+      <if test="packagePopulationId != null">
+        #{packagePopulationId,jdbcType=VARCHAR},
+      </if>
+      <if test="populationName != null">
+        #{populationName,jdbcType=VARCHAR},
+      </if>
+      <if test="packageSourceId != null">
+        #{packageSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageSourceName != null">
+        #{packageSourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="packageRemark != null">
+        #{packageRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="packagePrimePrice != null">
+        #{packagePrimePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="packageCurrentPrice != null">
+        #{packageCurrentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="packageStatus != null">
+        #{packageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="packageCollectType != null">
+        #{packageCollectType,jdbcType=INTEGER},
+      </if>
+      <if test="packageSamplePic != null">
+        #{packageSamplePic,jdbcType=VARCHAR},
+      </if>
+      <if test="packageStep != null">
+        #{packageStep,jdbcType=CHAR},
+      </if>
+      <if test="packageReportType != null">
+        #{packageReportType,jdbcType=INTEGER},
+      </if>
+      <if test="packageReportCharge != null">
+        #{packageReportCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="packageReportTime != null">
+        #{packageReportTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reportTimeDesc != null">
+        #{reportTimeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleTypeName != null">
+        #{sampleTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleType != null">
+        #{sampleType,jdbcType=INTEGER},
+      </if>
+      <if test="packageSpecialRequirement != null">
+        #{packageSpecialRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="packageEquipment != null">
+        #{packageEquipment,jdbcType=VARCHAR},
+      </if>
+      <if test="storageCondition != null">
+        #{storageCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="testObjectId != null">
+        #{testObjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicalSignificance != null">
+        #{clinicalSignificance,jdbcType=VARCHAR},
+      </if>
+      <if test="labGroup != null">
+        #{labGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="priceCode != null">
+        #{priceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfNum != null">
+        #{pdfNum,jdbcType=INTEGER},
+      </if>
+      <if test="logoForm != null">
+        #{logoForm,jdbcType=INTEGER},
+      </if>
+      <if test="packageType != null">
+        #{packageType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletPackageExample" resultType="java.lang.Long">
+    select count(*) from applet_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_package
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.packageId != null">
+        package_id = #{record.packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labCode != null">
+        lab_code = #{record.labCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageName != null">
+        package_name = #{record.packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageLogo != null">
+        package_logo = #{record.packageLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageInfo != null">
+        package_info = #{record.packageInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageLabel != null">
+        package_label = #{record.packageLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageRecommendation != null">
+        package_recommendation = #{record.packageRecommendation,jdbcType=INTEGER},
+      </if>
+      <if test="record.packagePriority != null">
+        package_priority = #{record.packagePriority,jdbcType=INTEGER},
+      </if>
+      <if test="record.packageCatalogId != null">
+        package_catalog_id = #{record.packageCatalogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageMessage != null">
+        package_message = #{record.packageMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packagePurposeId != null">
+        package_purpose_id = #{record.packagePurposeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packagePopulationId != null">
+        package_population_id = #{record.packagePopulationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.populationName != null">
+        population_name = #{record.populationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageSourceId != null">
+        package_source_id = #{record.packageSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageSourceName != null">
+        package_source_name = #{record.packageSourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageRemark != null">
+        package_remark = #{record.packageRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packagePrimePrice != null">
+        package_prime_price = #{record.packagePrimePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.packageCurrentPrice != null">
+        package_current_price = #{record.packageCurrentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.packageStatus != null">
+        package_status = #{record.packageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.packageCollectType != null">
+        package_collect_type = #{record.packageCollectType,jdbcType=INTEGER},
+      </if>
+      <if test="record.packageSamplePic != null">
+        package_sample_pic = #{record.packageSamplePic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageStep != null">
+        package_step = #{record.packageStep,jdbcType=CHAR},
+      </if>
+      <if test="record.packageReportType != null">
+        package_report_type = #{record.packageReportType,jdbcType=INTEGER},
+      </if>
+      <if test="record.packageReportCharge != null">
+        package_report_charge = #{record.packageReportCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.packageReportTime != null">
+        package_report_time = #{record.packageReportTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportTimeDesc != null">
+        report_time_desc = #{record.reportTimeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sampleTypeName != null">
+        sample_type_name = #{record.sampleTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sampleType != null">
+        sample_type = #{record.sampleType,jdbcType=INTEGER},
+      </if>
+      <if test="record.packageSpecialRequirement != null">
+        package_special_requirement = #{record.packageSpecialRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageEquipment != null">
+        package_equipment = #{record.packageEquipment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storageCondition != null">
+        storage_condition = #{record.storageCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.testObjectId != null">
+        test_object_id = #{record.testObjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clinicalSignificance != null">
+        clinical_significance = #{record.clinicalSignificance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labGroup != null">
+        lab_group = #{record.labGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceCode != null">
+        price_code = #{record.priceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdfNum != null">
+        pdf_num = #{record.pdfNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.logoForm != null">
+        logo_form = #{record.logoForm,jdbcType=INTEGER},
+      </if>
+      <if test="record.packageType != null">
+        package_type = #{record.packageType,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_package
+    set id = #{record.id,jdbcType=INTEGER},
+      package_id = #{record.packageId,jdbcType=VARCHAR},
+      lab_code = #{record.labCode,jdbcType=VARCHAR},
+      package_name = #{record.packageName,jdbcType=VARCHAR},
+      package_logo = #{record.packageLogo,jdbcType=VARCHAR},
+      package_info = #{record.packageInfo,jdbcType=VARCHAR},
+      package_label = #{record.packageLabel,jdbcType=VARCHAR},
+      package_recommendation = #{record.packageRecommendation,jdbcType=INTEGER},
+      package_priority = #{record.packagePriority,jdbcType=INTEGER},
+      package_catalog_id = #{record.packageCatalogId,jdbcType=VARCHAR},
+      package_message = #{record.packageMessage,jdbcType=VARCHAR},
+      package_purpose_id = #{record.packagePurposeId,jdbcType=VARCHAR},
+      package_population_id = #{record.packagePopulationId,jdbcType=VARCHAR},
+      population_name = #{record.populationName,jdbcType=VARCHAR},
+      package_source_id = #{record.packageSourceId,jdbcType=VARCHAR},
+      package_source_name = #{record.packageSourceName,jdbcType=VARCHAR},
+      package_remark = #{record.packageRemark,jdbcType=VARCHAR},
+      package_prime_price = #{record.packagePrimePrice,jdbcType=DECIMAL},
+      package_current_price = #{record.packageCurrentPrice,jdbcType=DECIMAL},
+      package_status = #{record.packageStatus,jdbcType=INTEGER},
+      package_collect_type = #{record.packageCollectType,jdbcType=INTEGER},
+      package_sample_pic = #{record.packageSamplePic,jdbcType=VARCHAR},
+      package_step = #{record.packageStep,jdbcType=CHAR},
+      package_report_type = #{record.packageReportType,jdbcType=INTEGER},
+      package_report_charge = #{record.packageReportCharge,jdbcType=DECIMAL},
+      package_report_time = #{record.packageReportTime,jdbcType=VARCHAR},
+      report_time_desc = #{record.reportTimeDesc,jdbcType=VARCHAR},
+      sample_type_name = #{record.sampleTypeName,jdbcType=VARCHAR},
+      sample_type = #{record.sampleType,jdbcType=INTEGER},
+      package_special_requirement = #{record.packageSpecialRequirement,jdbcType=VARCHAR},
+      package_equipment = #{record.packageEquipment,jdbcType=VARCHAR},
+      storage_condition = #{record.storageCondition,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      test_object_id = #{record.testObjectId,jdbcType=VARCHAR},
+      clinical_significance = #{record.clinicalSignificance,jdbcType=VARCHAR},
+      lab_group = #{record.labGroup,jdbcType=VARCHAR},
+      price_code = #{record.priceCode,jdbcType=VARCHAR},
+      pdf_num = #{record.pdfNum,jdbcType=INTEGER},
+      logo_form = #{record.logoForm,jdbcType=INTEGER},
+      package_type = #{record.packageType,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tclab.weixinappletservice.pojo.AppletPackage">
+    update applet_package
+    <set>
+      <if test="packageId != null">
+        package_id = #{packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="labCode != null">
+        lab_code = #{labCode,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null">
+        package_name = #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="packageLogo != null">
+        package_logo = #{packageLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="packageInfo != null">
+        package_info = #{packageInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="packageLabel != null">
+        package_label = #{packageLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="packageRecommendation != null">
+        package_recommendation = #{packageRecommendation,jdbcType=INTEGER},
+      </if>
+      <if test="packagePriority != null">
+        package_priority = #{packagePriority,jdbcType=INTEGER},
+      </if>
+      <if test="packageCatalogId != null">
+        package_catalog_id = #{packageCatalogId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageMessage != null">
+        package_message = #{packageMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="packagePurposeId != null">
+        package_purpose_id = #{packagePurposeId,jdbcType=VARCHAR},
+      </if>
+      <if test="packagePopulationId != null">
+        package_population_id = #{packagePopulationId,jdbcType=VARCHAR},
+      </if>
+      <if test="populationName != null">
+        population_name = #{populationName,jdbcType=VARCHAR},
+      </if>
+      <if test="packageSourceId != null">
+        package_source_id = #{packageSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageSourceName != null">
+        package_source_name = #{packageSourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="packageRemark != null">
+        package_remark = #{packageRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="packagePrimePrice != null">
+        package_prime_price = #{packagePrimePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="packageCurrentPrice != null">
+        package_current_price = #{packageCurrentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="packageStatus != null">
+        package_status = #{packageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="packageCollectType != null">
+        package_collect_type = #{packageCollectType,jdbcType=INTEGER},
+      </if>
+      <if test="packageSamplePic != null">
+        package_sample_pic = #{packageSamplePic,jdbcType=VARCHAR},
+      </if>
+      <if test="packageStep != null">
+        package_step = #{packageStep,jdbcType=CHAR},
+      </if>
+      <if test="packageReportType != null">
+        package_report_type = #{packageReportType,jdbcType=INTEGER},
+      </if>
+      <if test="packageReportCharge != null">
+        package_report_charge = #{packageReportCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="packageReportTime != null">
+        package_report_time = #{packageReportTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reportTimeDesc != null">
+        report_time_desc = #{reportTimeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleTypeName != null">
+        sample_type_name = #{sampleTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleType != null">
+        sample_type = #{sampleType,jdbcType=INTEGER},
+      </if>
+      <if test="packageSpecialRequirement != null">
+        package_special_requirement = #{packageSpecialRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="packageEquipment != null">
+        package_equipment = #{packageEquipment,jdbcType=VARCHAR},
+      </if>
+      <if test="storageCondition != null">
+        storage_condition = #{storageCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="testObjectId != null">
+        test_object_id = #{testObjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicalSignificance != null">
+        clinical_significance = #{clinicalSignificance,jdbcType=VARCHAR},
+      </if>
+      <if test="labGroup != null">
+        lab_group = #{labGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="priceCode != null">
+        price_code = #{priceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfNum != null">
+        pdf_num = #{pdfNum,jdbcType=INTEGER},
+      </if>
+      <if test="logoForm != null">
+        logo_form = #{logoForm,jdbcType=INTEGER},
+      </if>
+      <if test="packageType != null">
+        package_type = #{packageType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tclab.weixinappletservice.pojo.AppletPackage">
+    update applet_package
+    set package_id = #{packageId,jdbcType=VARCHAR},
+      lab_code = #{labCode,jdbcType=VARCHAR},
+      package_name = #{packageName,jdbcType=VARCHAR},
+      package_logo = #{packageLogo,jdbcType=VARCHAR},
+      package_info = #{packageInfo,jdbcType=VARCHAR},
+      package_label = #{packageLabel,jdbcType=VARCHAR},
+      package_recommendation = #{packageRecommendation,jdbcType=INTEGER},
+      package_priority = #{packagePriority,jdbcType=INTEGER},
+      package_catalog_id = #{packageCatalogId,jdbcType=VARCHAR},
+      package_message = #{packageMessage,jdbcType=VARCHAR},
+      package_purpose_id = #{packagePurposeId,jdbcType=VARCHAR},
+      package_population_id = #{packagePopulationId,jdbcType=VARCHAR},
+      population_name = #{populationName,jdbcType=VARCHAR},
+      package_source_id = #{packageSourceId,jdbcType=VARCHAR},
+      package_source_name = #{packageSourceName,jdbcType=VARCHAR},
+      package_remark = #{packageRemark,jdbcType=VARCHAR},
+      package_prime_price = #{packagePrimePrice,jdbcType=DECIMAL},
+      package_current_price = #{packageCurrentPrice,jdbcType=DECIMAL},
+      package_status = #{packageStatus,jdbcType=INTEGER},
+      package_collect_type = #{packageCollectType,jdbcType=INTEGER},
+      package_sample_pic = #{packageSamplePic,jdbcType=VARCHAR},
+      package_step = #{packageStep,jdbcType=CHAR},
+      package_report_type = #{packageReportType,jdbcType=INTEGER},
+      package_report_charge = #{packageReportCharge,jdbcType=DECIMAL},
+      package_report_time = #{packageReportTime,jdbcType=VARCHAR},
+      report_time_desc = #{reportTimeDesc,jdbcType=VARCHAR},
+      sample_type_name = #{sampleTypeName,jdbcType=VARCHAR},
+      sample_type = #{sampleType,jdbcType=INTEGER},
+      package_special_requirement = #{packageSpecialRequirement,jdbcType=VARCHAR},
+      package_equipment = #{packageEquipment,jdbcType=VARCHAR},
+      storage_condition = #{storageCondition,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      test_object_id = #{testObjectId,jdbcType=VARCHAR},
+      clinical_significance = #{clinicalSignificance,jdbcType=VARCHAR},
+      lab_group = #{labGroup,jdbcType=VARCHAR},
+      price_code = #{priceCode,jdbcType=VARCHAR},
+      pdf_num = #{pdfNum,jdbcType=INTEGER},
+      logo_form = #{logoForm,jdbcType=INTEGER},
+      package_type = #{packageType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="queryPackageByParam"
+    parameterType="com.tclab.weixinappletservice.model.query.PackageQueryParam"
+    resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    (
+    SELECT
+    package_id AS pid
+    FROM
+    applet_package_tag_filter
+    WHERE
+    1=1
+    <if test="tagId != null and tagId != ''">
+      AND
+      tag_id = #{tagId,jdbcType=VARCHAR}
+    </if>
+    GROUP BY pid
+    ) b
+    INNER JOIN
+    (
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    applet_package
+    WHERE
+    1=1
+    <if test="packageId != null and packageId != ''">
+      AND
+      package_id = #{packageId,jdbcType=VARCHAR}
+    </if>
+    <if test="packageName != null and packageName != ''">
+      AND
+      package_name LIKE CONCAT('%',#{packageName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="sourceId != null and sourceId != ''">
+      AND
+      package_source_id = #{sourceId,jdbcType=VARCHAR}
+    </if>
+    <if test="sampleType != null">
+      AND
+      sample_type = #{sampleType,jdbcType=INTEGER}
+    </if>
+    and package_type = 0
+    ) a
+    ON
+    a.package_id = b.pid
+  </select>
+
+  <update id="updatePackageRecommendForAll">
+    UPDATE
+    applet_package
+    SET
+    package_recommendation =
+    (
+    SELECT
+    a.countForPackage
+    FROM
+    (SELECT
+    package_id AS packageId,count(*) AS countForPackage
+    FROM
+    applet_good
+    WHERE
+    del_flag = 0
+    AND
+    good_status IN (3,4,7,8)
+    GROUP BY
+    package_id) a
+    WHERE
+    package_id = packageId
+    )
+  </update>
+
+  <select id="selectByTag" parameterType="com.tclab.weixinappletservice.model.query.QueryIdParam"
+    resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    (
+    SELECT
+    package_id AS packageIdForFilter
+    FROM
+    applet_package_tag_filter
+    WHERE
+    1=1
+    AND
+    del_flag = 0
+    <if test="tagId != null and tagId !=''">
+      AND
+      tag_id = #{tagId,jdbcType=VARCHAR}
+    </if>
+    ) a
+    LEFT JOIN
+    (
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    applet_package
+    WHERE
+    1=1
+    del_flag = 0
+    and package_type = 0
+    <if test="queryParam != null and queryParam != ''">
+      AND
+      package_name LIKE CONCAT('%', #{queryParam,jdbcType=VARCHAR}, '%')
+    </if>
+    ) b
+    ON a.packageIdForFilter = b.package_id
+  </select>
+  <resultMap id="imRecommendListPackageMap" type="com.tclab.weixinappletservice.model.vo.clientVo.apiVo.PackageVo">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="package_id" jdbcType="VARCHAR" property="packageId"/>
+    <result column="lab_code" jdbcType="VARCHAR" property="labCode"/>
+    <result column="package_name" jdbcType="VARCHAR" property="packageName"/>
+    <result column="package_logo" jdbcType="VARCHAR" property="packageLogo"/>
+    <result column="package_info" jdbcType="VARCHAR" property="packageInfo"/>
+    <result column="package_label" jdbcType="VARCHAR" property="packageLabel"/>
+    <result column="package_recommendation" jdbcType="INTEGER" property="packageRecommendation"/>
+    <result column="package_priority" jdbcType="INTEGER" property="packagePriority"/>
+    <result column="package_catalog_id" jdbcType="VARCHAR" property="packageCatalogId"/>
+    <result column="package_message" jdbcType="VARCHAR" property="packageMessage"/>
+    <result column="package_purpose_id" jdbcType="VARCHAR" property="packagePurposeId"/>
+    <result column="package_population_id" jdbcType="VARCHAR" property="packagePopulationId"/>
+    <result column="population_name" jdbcType="VARCHAR" property="populationName"/>
+    <result column="package_source_id" jdbcType="VARCHAR" property="packageSourceId"/>
+    <result column="package_source_name" jdbcType="VARCHAR" property="packageSourceName"/>
+    <result column="package_remark" jdbcType="VARCHAR" property="packageRemark"/>
+    <result column="package_prime_price" jdbcType="DECIMAL" property="packagePrimePrice"/>
+    <result column="package_current_price" jdbcType="DECIMAL" property="packageCurrentPrice"/>
+    <result column="package_status" jdbcType="INTEGER" property="packageStatus"/>
+    <result column="package_collect_type" jdbcType="INTEGER" property="packageCollectType"/>
+    <result column="package_sample_pic" jdbcType="VARCHAR" property="packageSamplePic"/>
+    <result column="package_step" jdbcType="CHAR" property="packageStep"/>
+    <result column="package_report_type" jdbcType="INTEGER" property="packageReportType"/>
+    <result column="package_report_charge" jdbcType="DECIMAL" property="packageReportCharge"/>
+    <result column="package_report_time" jdbcType="VARCHAR" property="packageReportTime"/>
+    <result column="report_time_desc" jdbcType="VARCHAR" property="reportTimeDesc"/>
+    <result column="sample_type_name" jdbcType="VARCHAR" property="sampleTypeName"/>
+    <result column="sample_type" jdbcType="INTEGER" property="sampleType"/>
+    <result column="package_special_requirement" jdbcType="VARCHAR"
+      property="packageSpecialRequirement"/>
+    <result column="package_equipment" jdbcType="VARCHAR" property="packageEquipment"/>
+    <result column="storage_condition" jdbcType="VARCHAR" property="storageCondition"/>
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+    <result column="test_object_id" jdbcType="VARCHAR" property="testObjectId"/>
+    <result column="clinical_significance" jdbcType="VARCHAR" property="clinicalSignificance"/>
+    <result column="lab_group" jdbcType="VARCHAR" property="labGroup"/>
+    <result column="price_code" jdbcType="VARCHAR" property="priceCode"/>
+    <result column="recommend_status" jdbcType="INTEGER" property="recommendStatus"/>
+    <result column="package_type" jdbcType="INTEGER" property="packageType"/>
+  </resultMap>
+  <select id="selectByImRecommendListId" parameterType="java.lang.String" resultMap="imRecommendListPackageMap">
+    select
+    a.id,a. package_id,a. lab_code,a. package_name,a. package_logo,a. package_info,a. package_label,a.
+    package_recommendation,a. package_priority,a. package_catalog_id,a. package_message,a. package_purpose_id,a.
+    package_population_id,a. population_name,a. package_source_id,a. package_source_name,a. package_remark,a.
+    package_prime_price,a. package_current_price,a. package_status,a. package_collect_type,a.
+    package_sample_pic,a. package_step,a. package_report_type,a. package_report_charge,a. package_report_time,a.
+    report_time_desc,a. sample_type_name,a. sample_type,a. package_special_requirement,a. package_equipment,a.
+    storage_condition,a. del_flag,a. create_date,a. update_date,a. test_object_id,a. clinical_significance,a.
+    lab_group,a. price_code,a. package_type,b.recommend_status
+    from applet_package a,applet_im_recommend_list_item b
+    where a.package_id = b.package_no
+    and  b.im_recommend_list_id = #{imRecommendListId,jdbcType=VARCHAR}
+    and b.del_flag = 0
+    and a.del_flag = 0
+    and a.package_type = 0
+  </select>
+</mapper>

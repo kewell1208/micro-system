@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletOrderParticipantMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletOrderParticipant">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+    <result column="participant_id" jdbcType="VARCHAR" property="participantId"/>
+    <result column="participant_name" jdbcType="VARCHAR" property="participantName"/>
+    <result column="participant_phone" jdbcType="VARCHAR" property="participantPhone"/>
+    <result column="participant_sex" jdbcType="INTEGER" property="participantSex"/>
+    <result column="participant_age" jdbcType="INTEGER" property="participantAge"/>
+    <result column="participant_id_card" jdbcType="VARCHAR" property="participantIdCard"/>
+    <result column="participant_relationship" jdbcType="VARCHAR"
+      property="participantRelationship"/>
+    <result column="participant_address" jdbcType="VARCHAR" property="participantAddress"/>
+    <result column="participant_medical_history" jdbcType="VARCHAR"
+      property="participantMedicalHistory"/>
+    <result column="participant_remark" jdbcType="VARCHAR" property="participantRemark"/>
+    <result column="participant_recent_acquisition_date" jdbcType="TIMESTAMP"
+      property="participantRecentAcquisitionDate"/>
+    <result column="verify_flag" jdbcType="INTEGER" property="verifyFlag"/>
+    <result column="default_flag" jdbcType="INTEGER" property="defaultFlag"/>
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="("
+                    separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="("
+                    separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, participant_id, participant_name, participant_phone, participant_sex, 
+    participant_age, participant_id_card, participant_relationship, participant_address, 
+    participant_medical_history, participant_remark, participant_recent_acquisition_date, 
+    verify_flag, default_flag, del_flag, create_date, update_date
+  </sql>
+  <select id="selectByExample"
+    parameterType="com.tclab.weixinappletservice.pojo.AppletOrderParticipantExample"
+    resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List"/>
+    from applet_order_participant
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from applet_order_participant
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_order_participant
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample"
+    parameterType="com.tclab.weixinappletservice.pojo.AppletOrderParticipantExample">
+    delete from applet_order_participant
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletOrderParticipant">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_order_participant (user_id, participant_id, participant_name,
+    participant_phone, participant_sex, participant_age,
+    participant_id_card, participant_relationship,
+    participant_address, participant_medical_history,
+    participant_remark, participant_recent_acquisition_date,
+    verify_flag, default_flag, del_flag,
+    create_date, update_date)
+    values (#{userId,jdbcType=VARCHAR}, #{participantId,jdbcType=VARCHAR},
+    #{participantName,jdbcType=VARCHAR},
+    #{participantPhone,jdbcType=VARCHAR}, #{participantSex,jdbcType=INTEGER},
+    #{participantAge,jdbcType=INTEGER},
+    #{participantIdCard,jdbcType=VARCHAR}, #{participantRelationship,jdbcType=VARCHAR},
+    #{participantAddress,jdbcType=VARCHAR}, #{participantMedicalHistory,jdbcType=VARCHAR},
+    #{participantRemark,jdbcType=VARCHAR}, #{participantRecentAcquisitionDate,jdbcType=TIMESTAMP},
+    #{verifyFlag,jdbcType=INTEGER}, #{defaultFlag,jdbcType=INTEGER}, #{delFlag,jdbcType=INTEGER},
+    #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective"
+    parameterType="com.tclab.weixinappletservice.pojo.AppletOrderParticipant">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_order_participant
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="participantId != null">
+        participant_id,
+      </if>
+      <if test="participantName != null">
+        participant_name,
+      </if>
+      <if test="participantPhone != null">
+        participant_phone,
+      </if>
+      <if test="participantSex != null">
+        participant_sex,
+      </if>
+      <if test="participantAge != null">
+        participant_age,
+      </if>
+      <if test="participantIdCard != null">
+        participant_id_card,
+      </if>
+      <if test="participantRelationship != null">
+        participant_relationship,
+      </if>
+      <if test="participantAddress != null">
+        participant_address,
+      </if>
+      <if test="participantMedicalHistory != null">
+        participant_medical_history,
+      </if>
+      <if test="participantRemark != null">
+        participant_remark,
+      </if>
+      <if test="participantRecentAcquisitionDate != null">
+        participant_recent_acquisition_date,
+      </if>
+      <if test="verifyFlag != null">
+        verify_flag,
+      </if>
+      <if test="defaultFlag != null">
+        default_flag,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantId != null">
+        #{participantId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantName != null">
+        #{participantName,jdbcType=VARCHAR},
+      </if>
+      <if test="participantPhone != null">
+        #{participantPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="participantSex != null">
+        #{participantSex,jdbcType=INTEGER},
+      </if>
+      <if test="participantAge != null">
+        #{participantAge,jdbcType=INTEGER},
+      </if>
+      <if test="participantIdCard != null">
+        #{participantIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="participantRelationship != null">
+        #{participantRelationship,jdbcType=VARCHAR},
+      </if>
+      <if test="participantAddress != null">
+        #{participantAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="participantMedicalHistory != null">
+        #{participantMedicalHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="participantRemark != null">
+        #{participantRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="participantRecentAcquisitionDate != null">
+        #{participantRecentAcquisitionDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyFlag != null">
+        #{verifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="defaultFlag != null">
+        #{defaultFlag,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample"
+    parameterType="com.tclab.weixinappletservice.pojo.AppletOrderParticipantExample"
+    resultType="java.lang.Long">
+    select count(*) from applet_order_participant
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_order_participant
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantId != null">
+        participant_id = #{record.participantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantName != null">
+        participant_name = #{record.participantName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantPhone != null">
+        participant_phone = #{record.participantPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantSex != null">
+        participant_sex = #{record.participantSex,jdbcType=INTEGER},
+      </if>
+      <if test="record.participantAge != null">
+        participant_age = #{record.participantAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.participantIdCard != null">
+        participant_id_card = #{record.participantIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantRelationship != null">
+        participant_relationship = #{record.participantRelationship,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantAddress != null">
+        participant_address = #{record.participantAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantMedicalHistory != null">
+        participant_medical_history = #{record.participantMedicalHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantRemark != null">
+        participant_remark = #{record.participantRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantRecentAcquisitionDate != null">
+        participant_recent_acquisition_date =
+        #{record.participantRecentAcquisitionDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.verifyFlag != null">
+        verify_flag = #{record.verifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.defaultFlag != null">
+        default_flag = #{record.defaultFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_order_participant
+    set id = #{record.id,jdbcType=INTEGER},
+    user_id = #{record.userId,jdbcType=VARCHAR},
+    participant_id = #{record.participantId,jdbcType=VARCHAR},
+    participant_name = #{record.participantName,jdbcType=VARCHAR},
+    participant_phone = #{record.participantPhone,jdbcType=VARCHAR},
+    participant_sex = #{record.participantSex,jdbcType=INTEGER},
+    participant_age = #{record.participantAge,jdbcType=INTEGER},
+    participant_id_card = #{record.participantIdCard,jdbcType=VARCHAR},
+    participant_relationship = #{record.participantRelationship,jdbcType=VARCHAR},
+    participant_address = #{record.participantAddress,jdbcType=VARCHAR},
+    participant_medical_history = #{record.participantMedicalHistory,jdbcType=VARCHAR},
+    participant_remark = #{record.participantRemark,jdbcType=VARCHAR},
+    participant_recent_acquisition_date =
+    #{record.participantRecentAcquisitionDate,jdbcType=TIMESTAMP},
+    verify_flag = #{record.verifyFlag,jdbcType=INTEGER},
+    default_flag = #{record.defaultFlag,jdbcType=INTEGER},
+    del_flag = #{record.delFlag,jdbcType=INTEGER},
+    create_date = #{record.createDate,jdbcType=TIMESTAMP},
+    update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective"
+    parameterType="com.tclab.weixinappletservice.pojo.AppletOrderParticipant">
+    update applet_order_participant
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantId != null">
+        participant_id = #{participantId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantName != null">
+        participant_name = #{participantName,jdbcType=VARCHAR},
+      </if>
+      <if test="participantPhone != null">
+        participant_phone = #{participantPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="participantSex != null">
+        participant_sex = #{participantSex,jdbcType=INTEGER},
+      </if>
+      <if test="participantAge != null">
+        participant_age = #{participantAge,jdbcType=INTEGER},
+      </if>
+      <if test="participantIdCard != null">
+        participant_id_card = #{participantIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="participantRelationship != null">
+        participant_relationship = #{participantRelationship,jdbcType=VARCHAR},
+      </if>
+      <if test="participantAddress != null">
+        participant_address = #{participantAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="participantMedicalHistory != null">
+        participant_medical_history = #{participantMedicalHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="participantRemark != null">
+        participant_remark = #{participantRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="participantRecentAcquisitionDate != null">
+        participant_recent_acquisition_date =
+        #{participantRecentAcquisitionDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyFlag != null">
+        verify_flag = #{verifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="defaultFlag != null">
+        default_flag = #{defaultFlag,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey"
+    parameterType="com.tclab.weixinappletservice.pojo.AppletOrderParticipant">
+    update applet_order_participant
+    set user_id = #{userId,jdbcType=VARCHAR},
+      participant_id = #{participantId,jdbcType=VARCHAR},
+      participant_name = #{participantName,jdbcType=VARCHAR},
+      participant_phone = #{participantPhone,jdbcType=VARCHAR},
+      participant_sex = #{participantSex,jdbcType=INTEGER},
+      participant_age = #{participantAge,jdbcType=INTEGER},
+      participant_id_card = #{participantIdCard,jdbcType=VARCHAR},
+      participant_relationship = #{participantRelationship,jdbcType=VARCHAR},
+      participant_address = #{participantAddress,jdbcType=VARCHAR},
+      participant_medical_history = #{participantMedicalHistory,jdbcType=VARCHAR},
+      participant_remark = #{participantRemark,jdbcType=VARCHAR},
+      participant_recent_acquisition_date = #{participantRecentAcquisitionDate,jdbcType=TIMESTAMP},
+      verify_flag = #{verifyFlag,jdbcType=INTEGER},
+      default_flag = #{defaultFlag,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getImRecordParticipant" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from applet_order_participant a
+    where a.participant_id in (
+    select distinct b.participant_id
+    from applet_im_record b
+    where b.doctor_id = #{doctorId,jdbcType=VARCHAR}
+    and b.del_flag = 0
+    and b.status = 2
+    <if test="participantQuery != null">
+    AND ( b.participant_phone LIKE CONCAT('%', #{participantQuery,jdbcType=VARCHAR}, '%')
+    OR b.participant_name LIKE CONCAT('%', #{participantQuery,jdbcType=VARCHAR}, '%') )
+    </if>
+    )
+    and a.del_flag = 0
+  </select>
+  <resultMap id="ServiceDateMap" type="com.tclab.weixinappletservice.model.vo.clientVo.apiVo.ServiceDateVo">
+    <result column="date" jdbcType="VARCHAR" property="serviceDate"/>
+    <result column="id" jdbcType="VARCHAR" property="serviceId"/>
+    <result column="type" jdbcType="VARCHAR" property="type"/>
+  </resultMap>
+  <select id="getServiceDateList" parameterType="java.lang.String" resultMap="ServiceDateMap">
+    SELECT
+      c.interpret_date date,
+      c.interpret_id id,
+      1 type
+    FROM
+      applet_interpret c
+    WHERE
+      c.del_flag = 0
+      AND c.interpret_status = 1
+      AND c.interpret_type = 0
+      AND c.participant_id = #{participantId,jdbcType=VARCHAR}
+      AND c.doctor_id = #{doctorId,jdbcType=VARCHAR}
+    UNION
+    SELECT
+      b.create_date date,
+      b.im_recommend_list_id id,
+      2 type
+    FROM
+      applet_im_recommend_list b
+    WHERE
+      b.del_flag = 0
+      AND b.recommend_status = 2
+      AND b.participant_id = #{participantId,jdbcType=VARCHAR}
+      AND b.doctor_id = #{doctorId,jdbcType=VARCHAR}
+    UNION
+    SELECT
+      c.interpret_date date,
+      c.interpret_id id,
+      3 type
+    FROM
+      applet_interpret c
+    WHERE
+      c.del_flag = 0
+      AND c.interpret_status = 1
+      AND c.interpret_type = 1
+      AND c.participant_id = #{participantId,jdbcType=VARCHAR}
+      AND c.doctor_id = #{doctorId,jdbcType=VARCHAR}
+    ORDER BY date desc
+  </select>
+
+</mapper>

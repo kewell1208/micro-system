@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletLogisticsMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletLogistics">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="logistics_id" jdbcType="VARCHAR" property="logisticsId" />
+    <result column="logistics_type" jdbcType="INTEGER" property="logisticsType" />
+    <result column="source_id" jdbcType="VARCHAR" property="sourceId" />
+    <result column="source_name" jdbcType="VARCHAR" property="sourceName" />
+    <result column="operator_id" jdbcType="VARCHAR" property="operatorId" />
+    <result column="operator_name" jdbcType="VARCHAR" property="operatorName" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="logistics_remark" jdbcType="VARCHAR" property="logisticsRemark" />
+    <result column="logistics_status" jdbcType="INTEGER" property="logisticsStatus" />
+    <result column="express_name" jdbcType="VARCHAR" property="expressName" />
+    <result column="waybill_no" jdbcType="VARCHAR" property="waybillNo" />
+    <result column="express_image" jdbcType="VARCHAR" property="expressImage" />
+    <result column="clerk_id" jdbcType="VARCHAR" property="clerkId" />
+    <result column="clerk_name" jdbcType="VARCHAR" property="clerkName" />
+    <result column="clerk_phone" jdbcType="VARCHAR" property="clerkPhone" />
+    <result column="logistics_apply_date" jdbcType="TIMESTAMP" property="logisticsApplyDate" />
+    <result column="logistics_pick_date" jdbcType="TIMESTAMP" property="logisticsPickDate" />
+    <result column="logistics_arrived_date" jdbcType="TIMESTAMP" property="logisticsArrivedDate" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, logistics_id, logistics_type, source_id, source_name, operator_id, operator_name, 
+    order_num, logistics_remark, logistics_status, express_name, waybill_no, express_image, 
+    clerk_id, clerk_name, clerk_phone, logistics_apply_date, logistics_pick_date, logistics_arrived_date, 
+    del_flag, create_date, update_date
+  </sql>
+  <select id="selectByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletLogisticsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from applet_logistics
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applet_logistics
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_logistics
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletLogisticsExample">
+    delete from applet_logistics
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletLogistics">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_logistics (logistics_id, logistics_type, source_id, 
+      source_name, operator_id, operator_name, 
+      order_num, logistics_remark, logistics_status, 
+      express_name, waybill_no, express_image, 
+      clerk_id, clerk_name, clerk_phone, 
+      logistics_apply_date, logistics_pick_date, 
+      logistics_arrived_date, del_flag, create_date, 
+      update_date)
+    values (#{logisticsId,jdbcType=VARCHAR}, #{logisticsType,jdbcType=INTEGER}, #{sourceId,jdbcType=VARCHAR}, 
+      #{sourceName,jdbcType=VARCHAR}, #{operatorId,jdbcType=VARCHAR}, #{operatorName,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=INTEGER}, #{logisticsRemark,jdbcType=VARCHAR}, #{logisticsStatus,jdbcType=INTEGER}, 
+      #{expressName,jdbcType=VARCHAR}, #{waybillNo,jdbcType=VARCHAR}, #{expressImage,jdbcType=VARCHAR}, 
+      #{clerkId,jdbcType=VARCHAR}, #{clerkName,jdbcType=VARCHAR}, #{clerkPhone,jdbcType=VARCHAR}, 
+      #{logisticsApplyDate,jdbcType=TIMESTAMP}, #{logisticsPickDate,jdbcType=TIMESTAMP}, 
+      #{logisticsArrivedDate,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tclab.weixinappletservice.pojo.AppletLogistics">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_logistics
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logisticsId != null">
+        logistics_id,
+      </if>
+      <if test="logisticsType != null">
+        logistics_type,
+      </if>
+      <if test="sourceId != null">
+        source_id,
+      </if>
+      <if test="sourceName != null">
+        source_name,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="operatorName != null">
+        operator_name,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="logisticsRemark != null">
+        logistics_remark,
+      </if>
+      <if test="logisticsStatus != null">
+        logistics_status,
+      </if>
+      <if test="expressName != null">
+        express_name,
+      </if>
+      <if test="waybillNo != null">
+        waybill_no,
+      </if>
+      <if test="expressImage != null">
+        express_image,
+      </if>
+      <if test="clerkId != null">
+        clerk_id,
+      </if>
+      <if test="clerkName != null">
+        clerk_name,
+      </if>
+      <if test="clerkPhone != null">
+        clerk_phone,
+      </if>
+      <if test="logisticsApplyDate != null">
+        logistics_apply_date,
+      </if>
+      <if test="logisticsPickDate != null">
+        logistics_pick_date,
+      </if>
+      <if test="logisticsArrivedDate != null">
+        logistics_arrived_date,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logisticsId != null">
+        #{logisticsId,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsType != null">
+        #{logisticsType,jdbcType=INTEGER},
+      </if>
+      <if test="sourceId != null">
+        #{sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceName != null">
+        #{sourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null">
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsRemark != null">
+        #{logisticsRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsStatus != null">
+        #{logisticsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="expressName != null">
+        #{expressName,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillNo != null">
+        #{waybillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="expressImage != null">
+        #{expressImage,jdbcType=VARCHAR},
+      </if>
+      <if test="clerkId != null">
+        #{clerkId,jdbcType=VARCHAR},
+      </if>
+      <if test="clerkName != null">
+        #{clerkName,jdbcType=VARCHAR},
+      </if>
+      <if test="clerkPhone != null">
+        #{clerkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsApplyDate != null">
+        #{logisticsApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logisticsPickDate != null">
+        #{logisticsPickDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logisticsArrivedDate != null">
+        #{logisticsArrivedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletLogisticsExample" resultType="java.lang.Long">
+    select count(*) from applet_logistics
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_logistics
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.logisticsId != null">
+        logistics_id = #{record.logisticsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logisticsType != null">
+        logistics_type = #{record.logisticsType,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourceId != null">
+        source_id = #{record.sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourceName != null">
+        source_name = #{record.sourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorId != null">
+        operator_id = #{record.operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null">
+        operator_name = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNum != null">
+        order_num = #{record.orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.logisticsRemark != null">
+        logistics_remark = #{record.logisticsRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logisticsStatus != null">
+        logistics_status = #{record.logisticsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.expressName != null">
+        express_name = #{record.expressName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waybillNo != null">
+        waybill_no = #{record.waybillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressImage != null">
+        express_image = #{record.expressImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clerkId != null">
+        clerk_id = #{record.clerkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clerkName != null">
+        clerk_name = #{record.clerkName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clerkPhone != null">
+        clerk_phone = #{record.clerkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logisticsApplyDate != null">
+        logistics_apply_date = #{record.logisticsApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logisticsPickDate != null">
+        logistics_pick_date = #{record.logisticsPickDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logisticsArrivedDate != null">
+        logistics_arrived_date = #{record.logisticsArrivedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_logistics
+    set id = #{record.id,jdbcType=INTEGER},
+      logistics_id = #{record.logisticsId,jdbcType=VARCHAR},
+      logistics_type = #{record.logisticsType,jdbcType=INTEGER},
+      source_id = #{record.sourceId,jdbcType=VARCHAR},
+      source_name = #{record.sourceName,jdbcType=VARCHAR},
+      operator_id = #{record.operatorId,jdbcType=VARCHAR},
+      operator_name = #{record.operatorName,jdbcType=VARCHAR},
+      order_num = #{record.orderNum,jdbcType=INTEGER},
+      logistics_remark = #{record.logisticsRemark,jdbcType=VARCHAR},
+      logistics_status = #{record.logisticsStatus,jdbcType=INTEGER},
+      express_name = #{record.expressName,jdbcType=VARCHAR},
+      waybill_no = #{record.waybillNo,jdbcType=VARCHAR},
+      express_image = #{record.expressImage,jdbcType=VARCHAR},
+      clerk_id = #{record.clerkId,jdbcType=VARCHAR},
+      clerk_name = #{record.clerkName,jdbcType=VARCHAR},
+      clerk_phone = #{record.clerkPhone,jdbcType=VARCHAR},
+      logistics_apply_date = #{record.logisticsApplyDate,jdbcType=TIMESTAMP},
+      logistics_pick_date = #{record.logisticsPickDate,jdbcType=TIMESTAMP},
+      logistics_arrived_date = #{record.logisticsArrivedDate,jdbcType=TIMESTAMP},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tclab.weixinappletservice.pojo.AppletLogistics">
+    update applet_logistics
+    <set>
+      <if test="logisticsId != null">
+        logistics_id = #{logisticsId,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsType != null">
+        logistics_type = #{logisticsType,jdbcType=INTEGER},
+      </if>
+      <if test="sourceId != null">
+        source_id = #{sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceName != null">
+        source_name = #{sourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null">
+        operator_name = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsRemark != null">
+        logistics_remark = #{logisticsRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsStatus != null">
+        logistics_status = #{logisticsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="expressName != null">
+        express_name = #{expressName,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillNo != null">
+        waybill_no = #{waybillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="expressImage != null">
+        express_image = #{expressImage,jdbcType=VARCHAR},
+      </if>
+      <if test="clerkId != null">
+        clerk_id = #{clerkId,jdbcType=VARCHAR},
+      </if>
+      <if test="clerkName != null">
+        clerk_name = #{clerkName,jdbcType=VARCHAR},
+      </if>
+      <if test="clerkPhone != null">
+        clerk_phone = #{clerkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsApplyDate != null">
+        logistics_apply_date = #{logisticsApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logisticsPickDate != null">
+        logistics_pick_date = #{logisticsPickDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logisticsArrivedDate != null">
+        logistics_arrived_date = #{logisticsArrivedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tclab.weixinappletservice.pojo.AppletLogistics">
+    update applet_logistics
+    set logistics_id = #{logisticsId,jdbcType=VARCHAR},
+      logistics_type = #{logisticsType,jdbcType=INTEGER},
+      source_id = #{sourceId,jdbcType=VARCHAR},
+      source_name = #{sourceName,jdbcType=VARCHAR},
+      operator_id = #{operatorId,jdbcType=VARCHAR},
+      operator_name = #{operatorName,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      logistics_remark = #{logisticsRemark,jdbcType=VARCHAR},
+      logistics_status = #{logisticsStatus,jdbcType=INTEGER},
+      express_name = #{expressName,jdbcType=VARCHAR},
+      waybill_no = #{waybillNo,jdbcType=VARCHAR},
+      express_image = #{expressImage,jdbcType=VARCHAR},
+      clerk_id = #{clerkId,jdbcType=VARCHAR},
+      clerk_name = #{clerkName,jdbcType=VARCHAR},
+      clerk_phone = #{clerkPhone,jdbcType=VARCHAR},
+      logistics_apply_date = #{logisticsApplyDate,jdbcType=TIMESTAMP},
+      logistics_pick_date = #{logisticsPickDate,jdbcType=TIMESTAMP},
+      logistics_arrived_date = #{logisticsArrivedDate,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

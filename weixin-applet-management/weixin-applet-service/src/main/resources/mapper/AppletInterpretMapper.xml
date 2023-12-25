@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletInterpretMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletInterpret">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="interpret_id" jdbcType="VARCHAR" property="interpretId" />
+    <result column="im_record_id" jdbcType="VARCHAR" property="imRecordId" />
+    <result column="participant_id" jdbcType="VARCHAR" property="participantId" />
+    <result column="participant_name" jdbcType="VARCHAR" property="participantName" />
+    <result column="participant_phone" jdbcType="VARCHAR" property="participantPhone" />
+    <result column="doctor_id" jdbcType="VARCHAR" property="doctorId" />
+    <result column="interpret_img" jdbcType="VARCHAR" property="interpretImg" />
+    <result column="interpret_content" jdbcType="VARCHAR" property="interpretContent" />
+    <result column="participant_diagnose" jdbcType="VARCHAR" property="participantDiagnose" />
+    <result column="interpret_date" jdbcType="TIMESTAMP" property="interpretDate" />
+    <result column="interpret_type" jdbcType="INTEGER" property="interpretType" />
+    <result column="interpret_cost" jdbcType="DECIMAL" property="interpretCost" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="participant_describe" jdbcType="VARCHAR" property="participantDescribe" />
+    <result column="participant_img" jdbcType="VARCHAR" property="participantImg" />
+    <result column="interpret_status" jdbcType="INTEGER" property="interpretStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, interpret_id, im_record_id, participant_id, participant_name, participant_phone, 
+    doctor_id, interpret_img, interpret_content, participant_diagnose, interpret_date, 
+    interpret_type, interpret_cost, create_date, update_date, del_flag, participant_describe, 
+    participant_img, interpret_status
+  </sql>
+  <select id="selectByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletInterpretExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from applet_interpret
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applet_interpret
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_interpret
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletInterpretExample">
+    delete from applet_interpret
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletInterpret">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_interpret (interpret_id, im_record_id, participant_id, 
+      participant_name, participant_phone, doctor_id, 
+      interpret_img, interpret_content, participant_diagnose, 
+      interpret_date, interpret_type, interpret_cost, 
+      create_date, update_date, del_flag, 
+      participant_describe, participant_img, interpret_status
+      )
+    values (#{interpretId,jdbcType=VARCHAR}, #{imRecordId,jdbcType=VARCHAR}, #{participantId,jdbcType=VARCHAR}, 
+      #{participantName,jdbcType=VARCHAR}, #{participantPhone,jdbcType=VARCHAR}, #{doctorId,jdbcType=VARCHAR}, 
+      #{interpretImg,jdbcType=VARCHAR}, #{interpretContent,jdbcType=VARCHAR}, #{participantDiagnose,jdbcType=VARCHAR}, 
+      #{interpretDate,jdbcType=TIMESTAMP}, #{interpretType,jdbcType=INTEGER}, #{interpretCost,jdbcType=DECIMAL}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=INTEGER}, 
+      #{participantDescribe,jdbcType=VARCHAR}, #{participantImg,jdbcType=VARCHAR}, #{interpretStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tclab.weixinappletservice.pojo.AppletInterpret">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_interpret
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="interpretId != null">
+        interpret_id,
+      </if>
+      <if test="imRecordId != null">
+        im_record_id,
+      </if>
+      <if test="participantId != null">
+        participant_id,
+      </if>
+      <if test="participantName != null">
+        participant_name,
+      </if>
+      <if test="participantPhone != null">
+        participant_phone,
+      </if>
+      <if test="doctorId != null">
+        doctor_id,
+      </if>
+      <if test="interpretImg != null">
+        interpret_img,
+      </if>
+      <if test="interpretContent != null">
+        interpret_content,
+      </if>
+      <if test="participantDiagnose != null">
+        participant_diagnose,
+      </if>
+      <if test="interpretDate != null">
+        interpret_date,
+      </if>
+      <if test="interpretType != null">
+        interpret_type,
+      </if>
+      <if test="interpretCost != null">
+        interpret_cost,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="participantDescribe != null">
+        participant_describe,
+      </if>
+      <if test="participantImg != null">
+        participant_img,
+      </if>
+      <if test="interpretStatus != null">
+        interpret_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="interpretId != null">
+        #{interpretId,jdbcType=VARCHAR},
+      </if>
+      <if test="imRecordId != null">
+        #{imRecordId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantId != null">
+        #{participantId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantName != null">
+        #{participantName,jdbcType=VARCHAR},
+      </if>
+      <if test="participantPhone != null">
+        #{participantPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="interpretImg != null">
+        #{interpretImg,jdbcType=VARCHAR},
+      </if>
+      <if test="interpretContent != null">
+        #{interpretContent,jdbcType=VARCHAR},
+      </if>
+      <if test="participantDiagnose != null">
+        #{participantDiagnose,jdbcType=VARCHAR},
+      </if>
+      <if test="interpretDate != null">
+        #{interpretDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interpretType != null">
+        #{interpretType,jdbcType=INTEGER},
+      </if>
+      <if test="interpretCost != null">
+        #{interpretCost,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="participantDescribe != null">
+        #{participantDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="participantImg != null">
+        #{participantImg,jdbcType=VARCHAR},
+      </if>
+      <if test="interpretStatus != null">
+        #{interpretStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletInterpretExample" resultType="java.lang.Long">
+    select count(*) from applet_interpret
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_interpret
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.interpretId != null">
+        interpret_id = #{record.interpretId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imRecordId != null">
+        im_record_id = #{record.imRecordId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantId != null">
+        participant_id = #{record.participantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantName != null">
+        participant_name = #{record.participantName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantPhone != null">
+        participant_phone = #{record.participantPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorId != null">
+        doctor_id = #{record.doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interpretImg != null">
+        interpret_img = #{record.interpretImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interpretContent != null">
+        interpret_content = #{record.interpretContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantDiagnose != null">
+        participant_diagnose = #{record.participantDiagnose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interpretDate != null">
+        interpret_date = #{record.interpretDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.interpretType != null">
+        interpret_type = #{record.interpretType,jdbcType=INTEGER},
+      </if>
+      <if test="record.interpretCost != null">
+        interpret_cost = #{record.interpretCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.participantDescribe != null">
+        participant_describe = #{record.participantDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantImg != null">
+        participant_img = #{record.participantImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interpretStatus != null">
+        interpret_status = #{record.interpretStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_interpret
+    set id = #{record.id,jdbcType=INTEGER},
+      interpret_id = #{record.interpretId,jdbcType=VARCHAR},
+      im_record_id = #{record.imRecordId,jdbcType=VARCHAR},
+      participant_id = #{record.participantId,jdbcType=VARCHAR},
+      participant_name = #{record.participantName,jdbcType=VARCHAR},
+      participant_phone = #{record.participantPhone,jdbcType=VARCHAR},
+      doctor_id = #{record.doctorId,jdbcType=VARCHAR},
+      interpret_img = #{record.interpretImg,jdbcType=VARCHAR},
+      interpret_content = #{record.interpretContent,jdbcType=VARCHAR},
+      participant_diagnose = #{record.participantDiagnose,jdbcType=VARCHAR},
+      interpret_date = #{record.interpretDate,jdbcType=TIMESTAMP},
+      interpret_type = #{record.interpretType,jdbcType=INTEGER},
+      interpret_cost = #{record.interpretCost,jdbcType=DECIMAL},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      participant_describe = #{record.participantDescribe,jdbcType=VARCHAR},
+      participant_img = #{record.participantImg,jdbcType=VARCHAR},
+      interpret_status = #{record.interpretStatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tclab.weixinappletservice.pojo.AppletInterpret">
+    update applet_interpret
+    <set>
+      <if test="interpretId != null">
+        interpret_id = #{interpretId,jdbcType=VARCHAR},
+      </if>
+      <if test="imRecordId != null">
+        im_record_id = #{imRecordId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantId != null">
+        participant_id = #{participantId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantName != null">
+        participant_name = #{participantName,jdbcType=VARCHAR},
+      </if>
+      <if test="participantPhone != null">
+        participant_phone = #{participantPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null">
+        doctor_id = #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="interpretImg != null">
+        interpret_img = #{interpretImg,jdbcType=VARCHAR},
+      </if>
+      <if test="interpretContent != null">
+        interpret_content = #{interpretContent,jdbcType=VARCHAR},
+      </if>
+      <if test="participantDiagnose != null">
+        participant_diagnose = #{participantDiagnose,jdbcType=VARCHAR},
+      </if>
+      <if test="interpretDate != null">
+        interpret_date = #{interpretDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interpretType != null">
+        interpret_type = #{interpretType,jdbcType=INTEGER},
+      </if>
+      <if test="interpretCost != null">
+        interpret_cost = #{interpretCost,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="participantDescribe != null">
+        participant_describe = #{participantDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="participantImg != null">
+        participant_img = #{participantImg,jdbcType=VARCHAR},
+      </if>
+      <if test="interpretStatus != null">
+        interpret_status = #{interpretStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tclab.weixinappletservice.pojo.AppletInterpret">
+    update applet_interpret
+    set interpret_id = #{interpretId,jdbcType=VARCHAR},
+      im_record_id = #{imRecordId,jdbcType=VARCHAR},
+      participant_id = #{participantId,jdbcType=VARCHAR},
+      participant_name = #{participantName,jdbcType=VARCHAR},
+      participant_phone = #{participantPhone,jdbcType=VARCHAR},
+      doctor_id = #{doctorId,jdbcType=VARCHAR},
+      interpret_img = #{interpretImg,jdbcType=VARCHAR},
+      interpret_content = #{interpretContent,jdbcType=VARCHAR},
+      participant_diagnose = #{participantDiagnose,jdbcType=VARCHAR},
+      interpret_date = #{interpretDate,jdbcType=TIMESTAMP},
+      interpret_type = #{interpretType,jdbcType=INTEGER},
+      interpret_cost = #{interpretCost,jdbcType=DECIMAL},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      participant_describe = #{participantDescribe,jdbcType=VARCHAR},
+      participant_img = #{participantImg,jdbcType=VARCHAR},
+      interpret_status = #{interpretStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

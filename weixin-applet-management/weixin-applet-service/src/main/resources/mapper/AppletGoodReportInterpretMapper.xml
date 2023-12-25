@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletGoodReportInterpretMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletGoodReportInterpret">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="pay_type" jdbcType="INTEGER" property="payType" />
+    <result column="report_id" jdbcType="VARCHAR" property="reportId" />
+    <result column="good_no" jdbcType="VARCHAR" property="goodNo" />
+    <result column="doctor_id" jdbcType="VARCHAR" property="doctorId" />
+    <result column="doctor_name" jdbcType="VARCHAR" property="doctorName" />
+    <result column="doctor_department" jdbcType="VARCHAR" property="doctorDepartment" />
+    <result column="doctor_rank" jdbcType="VARCHAR" property="doctorRank" />
+    <result column="doctor_label" jdbcType="VARCHAR" property="doctorLabel" />
+    <result column="interpretation_status" jdbcType="INTEGER" property="interpretationStatus" />
+    <result column="interpretation_date" jdbcType="TIMESTAMP" property="interpretationDate" />
+    <result column="report_content" jdbcType="VARCHAR" property="reportContent" />
+    <result column="report_reply" jdbcType="VARCHAR" property="reportReply" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, pay_type, report_id, good_no, doctor_id, doctor_name, doctor_department, 
+    doctor_rank, doctor_label, interpretation_status, interpretation_date, report_content, 
+    report_reply, del_flag, create_date, update_date
+  </sql>
+  <select id="selectByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodReportInterpretExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from applet_good_report_interpret
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applet_good_report_interpret
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_good_report_interpret
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodReportInterpretExample">
+    delete from applet_good_report_interpret
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodReportInterpret">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_good_report_interpret (user_id, pay_type, report_id, 
+      good_no, doctor_id, doctor_name, 
+      doctor_department, doctor_rank, doctor_label, 
+      interpretation_status, interpretation_date, 
+      report_content, report_reply, del_flag, 
+      create_date, update_date)
+    values (#{userId,jdbcType=VARCHAR}, #{payType,jdbcType=INTEGER}, #{reportId,jdbcType=VARCHAR}, 
+      #{goodNo,jdbcType=VARCHAR}, #{doctorId,jdbcType=VARCHAR}, #{doctorName,jdbcType=VARCHAR}, 
+      #{doctorDepartment,jdbcType=VARCHAR}, #{doctorRank,jdbcType=VARCHAR}, #{doctorLabel,jdbcType=VARCHAR}, 
+      #{interpretationStatus,jdbcType=INTEGER}, #{interpretationDate,jdbcType=TIMESTAMP}, 
+      #{reportContent,jdbcType=VARCHAR}, #{reportReply,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodReportInterpret">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_good_report_interpret
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="reportId != null">
+        report_id,
+      </if>
+      <if test="goodNo != null">
+        good_no,
+      </if>
+      <if test="doctorId != null">
+        doctor_id,
+      </if>
+      <if test="doctorName != null">
+        doctor_name,
+      </if>
+      <if test="doctorDepartment != null">
+        doctor_department,
+      </if>
+      <if test="doctorRank != null">
+        doctor_rank,
+      </if>
+      <if test="doctorLabel != null">
+        doctor_label,
+      </if>
+      <if test="interpretationStatus != null">
+        interpretation_status,
+      </if>
+      <if test="interpretationDate != null">
+        interpretation_date,
+      </if>
+      <if test="reportContent != null">
+        report_content,
+      </if>
+      <if test="reportReply != null">
+        report_reply,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="reportId != null">
+        #{reportId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodNo != null">
+        #{goodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorName != null">
+        #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorDepartment != null">
+        #{doctorDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorRank != null">
+        #{doctorRank,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorLabel != null">
+        #{doctorLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="interpretationStatus != null">
+        #{interpretationStatus,jdbcType=INTEGER},
+      </if>
+      <if test="interpretationDate != null">
+        #{interpretationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportContent != null">
+        #{reportContent,jdbcType=VARCHAR},
+      </if>
+      <if test="reportReply != null">
+        #{reportReply,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodReportInterpretExample" resultType="java.lang.Long">
+    select count(*) from applet_good_report_interpret
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_good_report_interpret
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payType != null">
+        pay_type = #{record.payType,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportId != null">
+        report_id = #{record.reportId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodNo != null">
+        good_no = #{record.goodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorId != null">
+        doctor_id = #{record.doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorName != null">
+        doctor_name = #{record.doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorDepartment != null">
+        doctor_department = #{record.doctorDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorRank != null">
+        doctor_rank = #{record.doctorRank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorLabel != null">
+        doctor_label = #{record.doctorLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interpretationStatus != null">
+        interpretation_status = #{record.interpretationStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.interpretationDate != null">
+        interpretation_date = #{record.interpretationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reportContent != null">
+        report_content = #{record.reportContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportReply != null">
+        report_reply = #{record.reportReply,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_good_report_interpret
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      pay_type = #{record.payType,jdbcType=INTEGER},
+      report_id = #{record.reportId,jdbcType=VARCHAR},
+      good_no = #{record.goodNo,jdbcType=VARCHAR},
+      doctor_id = #{record.doctorId,jdbcType=VARCHAR},
+      doctor_name = #{record.doctorName,jdbcType=VARCHAR},
+      doctor_department = #{record.doctorDepartment,jdbcType=VARCHAR},
+      doctor_rank = #{record.doctorRank,jdbcType=VARCHAR},
+      doctor_label = #{record.doctorLabel,jdbcType=VARCHAR},
+      interpretation_status = #{record.interpretationStatus,jdbcType=INTEGER},
+      interpretation_date = #{record.interpretationDate,jdbcType=TIMESTAMP},
+      report_content = #{record.reportContent,jdbcType=VARCHAR},
+      report_reply = #{record.reportReply,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodReportInterpret">
+    update applet_good_report_interpret
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="reportId != null">
+        report_id = #{reportId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodNo != null">
+        good_no = #{goodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null">
+        doctor_id = #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorName != null">
+        doctor_name = #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorDepartment != null">
+        doctor_department = #{doctorDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorRank != null">
+        doctor_rank = #{doctorRank,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorLabel != null">
+        doctor_label = #{doctorLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="interpretationStatus != null">
+        interpretation_status = #{interpretationStatus,jdbcType=INTEGER},
+      </if>
+      <if test="interpretationDate != null">
+        interpretation_date = #{interpretationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportContent != null">
+        report_content = #{reportContent,jdbcType=VARCHAR},
+      </if>
+      <if test="reportReply != null">
+        report_reply = #{reportReply,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodReportInterpret">
+    update applet_good_report_interpret
+    set user_id = #{userId,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=INTEGER},
+      report_id = #{reportId,jdbcType=VARCHAR},
+      good_no = #{goodNo,jdbcType=VARCHAR},
+      doctor_id = #{doctorId,jdbcType=VARCHAR},
+      doctor_name = #{doctorName,jdbcType=VARCHAR},
+      doctor_department = #{doctorDepartment,jdbcType=VARCHAR},
+      doctor_rank = #{doctorRank,jdbcType=VARCHAR},
+      doctor_label = #{doctorLabel,jdbcType=VARCHAR},
+      interpretation_status = #{interpretationStatus,jdbcType=INTEGER},
+      interpretation_date = #{interpretationDate,jdbcType=TIMESTAMP},
+      report_content = #{reportContent,jdbcType=VARCHAR},
+      report_reply = #{reportReply,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletImRecommendListItemMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletImRecommendListItem">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="im_recommend_list_id" jdbcType="VARCHAR" property="imRecommendListId" />
+    <result column="item_id" jdbcType="VARCHAR" property="itemId" />
+    <result column="package_no" jdbcType="VARCHAR" property="packageNo" />
+    <result column="package_name" jdbcType="VARCHAR" property="packageName" />
+    <result column="package_current_price" jdbcType="DECIMAL" property="packageCurrentPrice" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="recommend_status" jdbcType="INTEGER" property="recommendStatus" />
+    <result column="user_confirm_status" jdbcType="INTEGER" property="userConfirmStatus" />
+    <result column="good_no" jdbcType="VARCHAR" property="goodNo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, im_recommend_list_id, item_id, package_no, package_name, package_current_price, 
+    del_flag, create_date, update_date, recommend_status, user_confirm_status, good_no
+  </sql>
+  <select id="selectByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletImRecommendListItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from applet_im_recommend_list_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applet_im_recommend_list_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_im_recommend_list_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletImRecommendListItemExample">
+    delete from applet_im_recommend_list_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletImRecommendListItem">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_im_recommend_list_item (im_recommend_list_id, item_id, package_no, 
+      package_name, package_current_price, del_flag, 
+      create_date, update_date, recommend_status, 
+      user_confirm_status, good_no)
+    values (#{imRecommendListId,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, #{packageNo,jdbcType=VARCHAR}, 
+      #{packageName,jdbcType=VARCHAR}, #{packageCurrentPrice,jdbcType=DECIMAL}, #{delFlag,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{recommendStatus,jdbcType=INTEGER}, 
+      #{userConfirmStatus,jdbcType=INTEGER}, #{goodNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tclab.weixinappletservice.pojo.AppletImRecommendListItem">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_im_recommend_list_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imRecommendListId != null">
+        im_recommend_list_id,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="packageNo != null">
+        package_no,
+      </if>
+      <if test="packageName != null">
+        package_name,
+      </if>
+      <if test="packageCurrentPrice != null">
+        package_current_price,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="recommendStatus != null">
+        recommend_status,
+      </if>
+      <if test="userConfirmStatus != null">
+        user_confirm_status,
+      </if>
+      <if test="goodNo != null">
+        good_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imRecommendListId != null">
+        #{imRecommendListId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageNo != null">
+        #{packageNo,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null">
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="packageCurrentPrice != null">
+        #{packageCurrentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommendStatus != null">
+        #{recommendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userConfirmStatus != null">
+        #{userConfirmStatus,jdbcType=INTEGER},
+      </if>
+      <if test="goodNo != null">
+        #{goodNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletImRecommendListItemExample" resultType="java.lang.Long">
+    select count(*) from applet_im_recommend_list_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_im_recommend_list_item
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.imRecommendListId != null">
+        im_recommend_list_id = #{record.imRecommendListId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemId != null">
+        item_id = #{record.itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageNo != null">
+        package_no = #{record.packageNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageName != null">
+        package_name = #{record.packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageCurrentPrice != null">
+        package_current_price = #{record.packageCurrentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.recommendStatus != null">
+        recommend_status = #{record.recommendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.userConfirmStatus != null">
+        user_confirm_status = #{record.userConfirmStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodNo != null">
+        good_no = #{record.goodNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_im_recommend_list_item
+    set id = #{record.id,jdbcType=INTEGER},
+      im_recommend_list_id = #{record.imRecommendListId,jdbcType=VARCHAR},
+      item_id = #{record.itemId,jdbcType=VARCHAR},
+      package_no = #{record.packageNo,jdbcType=VARCHAR},
+      package_name = #{record.packageName,jdbcType=VARCHAR},
+      package_current_price = #{record.packageCurrentPrice,jdbcType=DECIMAL},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      recommend_status = #{record.recommendStatus,jdbcType=INTEGER},
+      user_confirm_status = #{record.userConfirmStatus,jdbcType=INTEGER},
+      good_no = #{record.goodNo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tclab.weixinappletservice.pojo.AppletImRecommendListItem">
+    update applet_im_recommend_list_item
+    <set>
+      <if test="imRecommendListId != null">
+        im_recommend_list_id = #{imRecommendListId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageNo != null">
+        package_no = #{packageNo,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null">
+        package_name = #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="packageCurrentPrice != null">
+        package_current_price = #{packageCurrentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommendStatus != null">
+        recommend_status = #{recommendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userConfirmStatus != null">
+        user_confirm_status = #{userConfirmStatus,jdbcType=INTEGER},
+      </if>
+      <if test="goodNo != null">
+        good_no = #{goodNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tclab.weixinappletservice.pojo.AppletImRecommendListItem">
+    update applet_im_recommend_list_item
+    set im_recommend_list_id = #{imRecommendListId,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=VARCHAR},
+      package_no = #{packageNo,jdbcType=VARCHAR},
+      package_name = #{packageName,jdbcType=VARCHAR},
+      package_current_price = #{packageCurrentPrice,jdbcType=DECIMAL},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      recommend_status = #{recommendStatus,jdbcType=INTEGER},
+      user_confirm_status = #{userConfirmStatus,jdbcType=INTEGER},
+      good_no = #{goodNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectLastImRecommendItemForDoctor2participant"
+          parameterType="com.tclab.weixinappletservice.model.query.QueryImRecordParam"
+          resultMap="BaseResultMap">
+    SELECT
+    a.id AS id,
+    a.im_recommend_list_id AS im_recommend_list_id,
+    a.item_id AS item_id,
+    a.package_no AS package_no,
+    a.package_name AS package_name,
+    a.package_current_price AS package_current_price,
+    a.del_flag AS del_flag,
+    a.create_date AS create_date,
+    a.update_date AS update_date,
+    a.recommend_status AS recommend_status,
+    a.good_no AS good_no
+    FROM
+    applet_im_recommend_list_item a,applet_im_recommend_list b
+    WHERE
+    a.im_recommend_list_id = b.im_recommend_list_id
+    <if test="userId != null and userId !=''">
+      AND
+      b.user_id = #{userId,jdbcType=VARCHAR}
+    </if>
+    <if test="doctorId != null and doctorId != ''">
+      AND
+      b.doctor_id = #{doctorId,jdbcType=VARCHAR}
+    </if>
+    <if test="participantId != null and participantId != ''">
+      AND
+      b.participant_id = #{participantId,jdbcType=VARCHAR}
+    </if>
+    ORDER BY a.create_date DESC
+    LIMIT 10
+  </select>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    INSERT INTO applet_im_recommend_list_item (im_recommend_list_id, item_id, package_no,
+    package_name, package_current_price, del_flag,
+    create_date, update_date, recommend_status,
+    good_no)
+    VALUES
+    <foreach collection="appletImRecommendListItemList" item="appletImRecommendListItem"
+             separator=",">
+      (#{appletImRecommendListItem.imRecommendListId,jdbcType=VARCHAR},
+      #{appletImRecommendListItem.itemId,jdbcType=VARCHAR},
+      #{appletImRecommendListItem.packageNo,jdbcType=VARCHAR},
+      #{appletImRecommendListItem.packageName,jdbcType=VARCHAR},
+      #{appletImRecommendListItem.packageCurrentPrice,jdbcType=DECIMAL},
+      #{appletImRecommendListItem.delFlag,jdbcType=INTEGER},
+      #{appletImRecommendListItem.createDate,jdbcType=TIMESTAMP},
+      #{appletImRecommendListItem.updateDate,jdbcType=TIMESTAMP},
+      #{appletImRecommendListItem.recommendStatus,jdbcType=INTEGER},
+      #{appletImRecommendListItem.goodNo,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="appletImRecommendListItemList" item="appletImRecommendListItem"
+             index="index" open="" close="" separator=";">
+      UPDATE applet_im_recommend_list_item
+      <set>
+        <if
+                test="appletImRecommendListItem.delFlag != null and appletImRecommendListItem.delFlag != ''">
+          del_flag = #{appletImRecommendListItem.delFlag,jdbcType=INTEGER},
+        </if>
+        <if
+                test="appletImRecommendListItem.recommendStatus != null and appletImRecommendListItem.recommendStatus != ''">
+          recommend_status = #{appletImRecommendListItem.recommendStatus,jdbcType=INTEGER},
+        </if>
+      </set>
+      <where>
+        im_recommend_list_id = #{appletImRecommendListItem.id,jdbcType=INTEGER}
+        and package_no =  #{appletImRecommendListItem.packageNo,jdbcType=VARCHAR}
+      </where>
+    </foreach>
+  </update>
+
+</mapper>

@@ -1,0 +1,1488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletGoodMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletGood">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="good_no" jdbcType="VARCHAR" property="goodNo" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="participant_id" jdbcType="VARCHAR" property="participantId" />
+    <result column="package_id" jdbcType="VARCHAR" property="packageId" />
+    <result column="package_name" jdbcType="VARCHAR" property="packageName" />
+    <result column="package_num" jdbcType="INTEGER" property="packageNum" />
+    <result column="acquisition_id" jdbcType="VARCHAR" property="acquisitionId" />
+    <result column="acquisition_name" jdbcType="VARCHAR" property="acquisitionName" />
+    <result column="good_apply_date" jdbcType="TIMESTAMP" property="goodApplyDate" />
+    <result column="good_current_apply_date" jdbcType="TIMESTAMP" property="goodCurrentApplyDate" />
+    <result column="good_complete_apply_date" jdbcType="TIMESTAMP" property="goodCompleteApplyDate" />
+    <result column="staff_id" jdbcType="VARCHAR" property="staffId" />
+    <result column="staff_phone" jdbcType="VARCHAR" property="staffPhone" />
+    <result column="staff_name" jdbcType="VARCHAR" property="staffName" />
+    <result column="cost_staff_commission" jdbcType="DECIMAL" property="costStaffCommission" />
+    <result column="acquisition_department_id" jdbcType="VARCHAR" property="acquisitionDepartmentId" />
+    <result column="acquisition_department_name" jdbcType="VARCHAR" property="acquisitionDepartmentName" />
+    <result column="cost_department_commission" jdbcType="VARCHAR" property="costDepartmentCommission" />
+    <result column="recommedd_organization_id" jdbcType="VARCHAR" property="recommeddOrganizationId" />
+    <result column="recommedd_organization_name" jdbcType="VARCHAR" property="recommeddOrganizationName" />
+    <result column="cost_organization_commission" jdbcType="DECIMAL" property="costOrganizationCommission" />
+    <result column="cost_acquisition_charge" jdbcType="DECIMAL" property="costAcquisitionCharge" />
+    <result column="pay_amount" jdbcType="DECIMAL" property="payAmount" />
+    <result column="discount_amount" jdbcType="DECIMAL" property="discountAmount" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="service_type" jdbcType="INTEGER" property="serviceType" />
+    <result column="sample_no" jdbcType="VARCHAR" property="sampleNo" />
+    <result column="sample_collect_date" jdbcType="TIMESTAMP" property="sampleCollectDate" />
+    <result column="report_type" jdbcType="INTEGER" property="reportType" />
+    <result column="report_cost" jdbcType="DECIMAL" property="reportCost" />
+    <result column="report_img" jdbcType="VARCHAR" property="reportImg" />
+    <result column="report_date" jdbcType="TIMESTAMP" property="reportDate" />
+    <result column="doctor_name" jdbcType="VARCHAR" property="doctorName" />
+    <result column="doctor_phone" jdbcType="VARCHAR" property="doctorPhone" />
+    <result column="good_status" jdbcType="INTEGER" property="goodStatus" />
+    <result column="exception_status" jdbcType="INTEGER" property="exceptionStatus" />
+    <result column="exception_reason" jdbcType="INTEGER" property="exceptionReason" />
+    <result column="exception_solution" jdbcType="INTEGER" property="exceptionSolution" />
+    <result column="exception_solve_time" jdbcType="TIMESTAMP" property="exceptionSolveTime" />
+    <result column="refund_status" jdbcType="INTEGER" property="refundStatus" />
+    <result column="refund_reason" jdbcType="INTEGER" property="refundReason" />
+    <result column="refund_amount" jdbcType="DECIMAL" property="refundAmount" />
+    <result column="refund_remark" jdbcType="VARCHAR" property="refundRemark" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="collector_staff_id" jdbcType="VARCHAR" property="collectorStaffId" />
+    <result column="pdf_url" jdbcType="VARCHAR" property="pdfUrl" />
+    <result column="pdf_merge_url" jdbcType="VARCHAR" property="pdfMergeUrl" />
+    <result column="message_status" jdbcType="VARCHAR" property="messageStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_no, good_no, user_id, participant_id, package_id, package_name, package_num, 
+    acquisition_id, acquisition_name, good_apply_date, good_current_apply_date, good_complete_apply_date, 
+    staff_id, staff_phone, staff_name, cost_staff_commission, acquisition_department_id, 
+    acquisition_department_name, cost_department_commission, recommedd_organization_id, 
+    recommedd_organization_name, cost_organization_commission, cost_acquisition_charge, 
+    pay_amount, discount_amount, total_amount, service_type, sample_no, sample_collect_date, 
+    report_type, report_cost, report_img, report_date, doctor_name, doctor_phone, good_status, 
+    exception_status, exception_reason, exception_solution, exception_solve_time, refund_status, 
+    refund_reason, refund_amount, refund_remark, del_flag, create_date, update_date, 
+    collector_staff_id, pdf_url, pdf_merge_url, message_status
+  </sql>
+  <select id="selectByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from applet_good
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applet_good
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_good
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodExample">
+    delete from applet_good
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletGood">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_good (order_no, good_no, user_id, 
+      participant_id, package_id, package_name, 
+      package_num, acquisition_id, acquisition_name, 
+      good_apply_date, good_current_apply_date, 
+      good_complete_apply_date, staff_id, staff_phone, 
+      staff_name, cost_staff_commission, acquisition_department_id, 
+      acquisition_department_name, cost_department_commission, 
+      recommedd_organization_id, recommedd_organization_name, 
+      cost_organization_commission, cost_acquisition_charge, 
+      pay_amount, discount_amount, total_amount, 
+      service_type, sample_no, sample_collect_date, 
+      report_type, report_cost, report_img, 
+      report_date, doctor_name, doctor_phone, 
+      good_status, exception_status, exception_reason, 
+      exception_solution, exception_solve_time, 
+      refund_status, refund_reason, refund_amount, 
+      refund_remark, del_flag, create_date, 
+      update_date, collector_staff_id, pdf_url, 
+      pdf_merge_url, message_status)
+    values (#{orderNo,jdbcType=VARCHAR}, #{goodNo,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{participantId,jdbcType=VARCHAR}, #{packageId,jdbcType=VARCHAR}, #{packageName,jdbcType=VARCHAR}, 
+      #{packageNum,jdbcType=INTEGER}, #{acquisitionId,jdbcType=VARCHAR}, #{acquisitionName,jdbcType=VARCHAR}, 
+      #{goodApplyDate,jdbcType=TIMESTAMP}, #{goodCurrentApplyDate,jdbcType=TIMESTAMP}, 
+      #{goodCompleteApplyDate,jdbcType=TIMESTAMP}, #{staffId,jdbcType=VARCHAR}, #{staffPhone,jdbcType=VARCHAR}, 
+      #{staffName,jdbcType=VARCHAR}, #{costStaffCommission,jdbcType=DECIMAL}, #{acquisitionDepartmentId,jdbcType=VARCHAR}, 
+      #{acquisitionDepartmentName,jdbcType=VARCHAR}, #{costDepartmentCommission,jdbcType=VARCHAR}, 
+      #{recommeddOrganizationId,jdbcType=VARCHAR}, #{recommeddOrganizationName,jdbcType=VARCHAR}, 
+      #{costOrganizationCommission,jdbcType=DECIMAL}, #{costAcquisitionCharge,jdbcType=DECIMAL}, 
+      #{payAmount,jdbcType=DECIMAL}, #{discountAmount,jdbcType=DECIMAL}, #{totalAmount,jdbcType=DECIMAL}, 
+      #{serviceType,jdbcType=INTEGER}, #{sampleNo,jdbcType=VARCHAR}, #{sampleCollectDate,jdbcType=TIMESTAMP}, 
+      #{reportType,jdbcType=INTEGER}, #{reportCost,jdbcType=DECIMAL}, #{reportImg,jdbcType=VARCHAR}, 
+      #{reportDate,jdbcType=TIMESTAMP}, #{doctorName,jdbcType=VARCHAR}, #{doctorPhone,jdbcType=VARCHAR}, 
+      #{goodStatus,jdbcType=INTEGER}, #{exceptionStatus,jdbcType=INTEGER}, #{exceptionReason,jdbcType=INTEGER}, 
+      #{exceptionSolution,jdbcType=INTEGER}, #{exceptionSolveTime,jdbcType=TIMESTAMP}, 
+      #{refundStatus,jdbcType=INTEGER}, #{refundReason,jdbcType=INTEGER}, #{refundAmount,jdbcType=DECIMAL}, 
+      #{refundRemark,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{collectorStaffId,jdbcType=VARCHAR}, #{pdfUrl,jdbcType=VARCHAR}, 
+      #{pdfMergeUrl,jdbcType=VARCHAR}, #{messageStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tclab.weixinappletservice.pojo.AppletGood">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_good
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="goodNo != null">
+        good_no,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="participantId != null">
+        participant_id,
+      </if>
+      <if test="packageId != null">
+        package_id,
+      </if>
+      <if test="packageName != null">
+        package_name,
+      </if>
+      <if test="packageNum != null">
+        package_num,
+      </if>
+      <if test="acquisitionId != null">
+        acquisition_id,
+      </if>
+      <if test="acquisitionName != null">
+        acquisition_name,
+      </if>
+      <if test="goodApplyDate != null">
+        good_apply_date,
+      </if>
+      <if test="goodCurrentApplyDate != null">
+        good_current_apply_date,
+      </if>
+      <if test="goodCompleteApplyDate != null">
+        good_complete_apply_date,
+      </if>
+      <if test="staffId != null">
+        staff_id,
+      </if>
+      <if test="staffPhone != null">
+        staff_phone,
+      </if>
+      <if test="staffName != null">
+        staff_name,
+      </if>
+      <if test="costStaffCommission != null">
+        cost_staff_commission,
+      </if>
+      <if test="acquisitionDepartmentId != null">
+        acquisition_department_id,
+      </if>
+      <if test="acquisitionDepartmentName != null">
+        acquisition_department_name,
+      </if>
+      <if test="costDepartmentCommission != null">
+        cost_department_commission,
+      </if>
+      <if test="recommeddOrganizationId != null">
+        recommedd_organization_id,
+      </if>
+      <if test="recommeddOrganizationName != null">
+        recommedd_organization_name,
+      </if>
+      <if test="costOrganizationCommission != null">
+        cost_organization_commission,
+      </if>
+      <if test="costAcquisitionCharge != null">
+        cost_acquisition_charge,
+      </if>
+      <if test="payAmount != null">
+        pay_amount,
+      </if>
+      <if test="discountAmount != null">
+        discount_amount,
+      </if>
+      <if test="totalAmount != null">
+        total_amount,
+      </if>
+      <if test="serviceType != null">
+        service_type,
+      </if>
+      <if test="sampleNo != null">
+        sample_no,
+      </if>
+      <if test="sampleCollectDate != null">
+        sample_collect_date,
+      </if>
+      <if test="reportType != null">
+        report_type,
+      </if>
+      <if test="reportCost != null">
+        report_cost,
+      </if>
+      <if test="reportImg != null">
+        report_img,
+      </if>
+      <if test="reportDate != null">
+        report_date,
+      </if>
+      <if test="doctorName != null">
+        doctor_name,
+      </if>
+      <if test="doctorPhone != null">
+        doctor_phone,
+      </if>
+      <if test="goodStatus != null">
+        good_status,
+      </if>
+      <if test="exceptionStatus != null">
+        exception_status,
+      </if>
+      <if test="exceptionReason != null">
+        exception_reason,
+      </if>
+      <if test="exceptionSolution != null">
+        exception_solution,
+      </if>
+      <if test="exceptionSolveTime != null">
+        exception_solve_time,
+      </if>
+      <if test="refundStatus != null">
+        refund_status,
+      </if>
+      <if test="refundReason != null">
+        refund_reason,
+      </if>
+      <if test="refundAmount != null">
+        refund_amount,
+      </if>
+      <if test="refundRemark != null">
+        refund_remark,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="collectorStaffId != null">
+        collector_staff_id,
+      </if>
+      <if test="pdfUrl != null">
+        pdf_url,
+      </if>
+      <if test="pdfMergeUrl != null">
+        pdf_merge_url,
+      </if>
+      <if test="messageStatus != null">
+        message_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodNo != null">
+        #{goodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantId != null">
+        #{participantId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageId != null">
+        #{packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null">
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="packageNum != null">
+        #{packageNum,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionId != null">
+        #{acquisitionId,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionName != null">
+        #{acquisitionName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodApplyDate != null">
+        #{goodApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodCurrentApplyDate != null">
+        #{goodCurrentApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodCompleteApplyDate != null">
+        #{goodCompleteApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="staffId != null">
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffPhone != null">
+        #{staffPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="staffName != null">
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="costStaffCommission != null">
+        #{costStaffCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="acquisitionDepartmentId != null">
+        #{acquisitionDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionDepartmentName != null">
+        #{acquisitionDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="costDepartmentCommission != null">
+        #{costDepartmentCommission,jdbcType=VARCHAR},
+      </if>
+      <if test="recommeddOrganizationId != null">
+        #{recommeddOrganizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="recommeddOrganizationName != null">
+        #{recommeddOrganizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="costOrganizationCommission != null">
+        #{costOrganizationCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="costAcquisitionCharge != null">
+        #{costAcquisitionCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="payAmount != null">
+        #{payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="discountAmount != null">
+        #{discountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null">
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceType != null">
+        #{serviceType,jdbcType=INTEGER},
+      </if>
+      <if test="sampleNo != null">
+        #{sampleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleCollectDate != null">
+        #{sampleCollectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportType != null">
+        #{reportType,jdbcType=INTEGER},
+      </if>
+      <if test="reportCost != null">
+        #{reportCost,jdbcType=DECIMAL},
+      </if>
+      <if test="reportImg != null">
+        #{reportImg,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDate != null">
+        #{reportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doctorName != null">
+        #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorPhone != null">
+        #{doctorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="goodStatus != null">
+        #{goodStatus,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionStatus != null">
+        #{exceptionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionReason != null">
+        #{exceptionReason,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionSolution != null">
+        #{exceptionSolution,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionSolveTime != null">
+        #{exceptionSolveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundStatus != null">
+        #{refundStatus,jdbcType=INTEGER},
+      </if>
+      <if test="refundReason != null">
+        #{refundReason,jdbcType=INTEGER},
+      </if>
+      <if test="refundAmount != null">
+        #{refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="refundRemark != null">
+        #{refundRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectorStaffId != null">
+        #{collectorStaffId,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfUrl != null">
+        #{pdfUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfMergeUrl != null">
+        #{pdfMergeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="messageStatus != null">
+        #{messageStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletGoodExample" resultType="java.lang.Long">
+    select count(*) from applet_good
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_good
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderNo != null">
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodNo != null">
+        good_no = #{record.goodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantId != null">
+        participant_id = #{record.participantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageId != null">
+        package_id = #{record.packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageName != null">
+        package_name = #{record.packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageNum != null">
+        package_num = #{record.packageNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.acquisitionId != null">
+        acquisition_id = #{record.acquisitionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionName != null">
+        acquisition_name = #{record.acquisitionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodApplyDate != null">
+        good_apply_date = #{record.goodApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.goodCurrentApplyDate != null">
+        good_current_apply_date = #{record.goodCurrentApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.goodCompleteApplyDate != null">
+        good_complete_apply_date = #{record.goodCompleteApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.staffId != null">
+        staff_id = #{record.staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffPhone != null">
+        staff_phone = #{record.staffPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffName != null">
+        staff_name = #{record.staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.costStaffCommission != null">
+        cost_staff_commission = #{record.costStaffCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="record.acquisitionDepartmentId != null">
+        acquisition_department_id = #{record.acquisitionDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionDepartmentName != null">
+        acquisition_department_name = #{record.acquisitionDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.costDepartmentCommission != null">
+        cost_department_commission = #{record.costDepartmentCommission,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recommeddOrganizationId != null">
+        recommedd_organization_id = #{record.recommeddOrganizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recommeddOrganizationName != null">
+        recommedd_organization_name = #{record.recommeddOrganizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.costOrganizationCommission != null">
+        cost_organization_commission = #{record.costOrganizationCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="record.costAcquisitionCharge != null">
+        cost_acquisition_charge = #{record.costAcquisitionCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payAmount != null">
+        pay_amount = #{record.payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.discountAmount != null">
+        discount_amount = #{record.discountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalAmount != null">
+        total_amount = #{record.totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.serviceType != null">
+        service_type = #{record.serviceType,jdbcType=INTEGER},
+      </if>
+      <if test="record.sampleNo != null">
+        sample_no = #{record.sampleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sampleCollectDate != null">
+        sample_collect_date = #{record.sampleCollectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reportType != null">
+        report_type = #{record.reportType,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportCost != null">
+        report_cost = #{record.reportCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reportImg != null">
+        report_img = #{record.reportImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportDate != null">
+        report_date = #{record.reportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.doctorName != null">
+        doctor_name = #{record.doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorPhone != null">
+        doctor_phone = #{record.doctorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodStatus != null">
+        good_status = #{record.goodStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.exceptionStatus != null">
+        exception_status = #{record.exceptionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.exceptionReason != null">
+        exception_reason = #{record.exceptionReason,jdbcType=INTEGER},
+      </if>
+      <if test="record.exceptionSolution != null">
+        exception_solution = #{record.exceptionSolution,jdbcType=INTEGER},
+      </if>
+      <if test="record.exceptionSolveTime != null">
+        exception_solve_time = #{record.exceptionSolveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.refundStatus != null">
+        refund_status = #{record.refundStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundReason != null">
+        refund_reason = #{record.refundReason,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundAmount != null">
+        refund_amount = #{record.refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.refundRemark != null">
+        refund_remark = #{record.refundRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.collectorStaffId != null">
+        collector_staff_id = #{record.collectorStaffId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdfUrl != null">
+        pdf_url = #{record.pdfUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdfMergeUrl != null">
+        pdf_merge_url = #{record.pdfMergeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messageStatus != null">
+        message_status = #{record.messageStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_good
+    set id = #{record.id,jdbcType=INTEGER},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      good_no = #{record.goodNo,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      participant_id = #{record.participantId,jdbcType=VARCHAR},
+      package_id = #{record.packageId,jdbcType=VARCHAR},
+      package_name = #{record.packageName,jdbcType=VARCHAR},
+      package_num = #{record.packageNum,jdbcType=INTEGER},
+      acquisition_id = #{record.acquisitionId,jdbcType=VARCHAR},
+      acquisition_name = #{record.acquisitionName,jdbcType=VARCHAR},
+      good_apply_date = #{record.goodApplyDate,jdbcType=TIMESTAMP},
+      good_current_apply_date = #{record.goodCurrentApplyDate,jdbcType=TIMESTAMP},
+      good_complete_apply_date = #{record.goodCompleteApplyDate,jdbcType=TIMESTAMP},
+      staff_id = #{record.staffId,jdbcType=VARCHAR},
+      staff_phone = #{record.staffPhone,jdbcType=VARCHAR},
+      staff_name = #{record.staffName,jdbcType=VARCHAR},
+      cost_staff_commission = #{record.costStaffCommission,jdbcType=DECIMAL},
+      acquisition_department_id = #{record.acquisitionDepartmentId,jdbcType=VARCHAR},
+      acquisition_department_name = #{record.acquisitionDepartmentName,jdbcType=VARCHAR},
+      cost_department_commission = #{record.costDepartmentCommission,jdbcType=VARCHAR},
+      recommedd_organization_id = #{record.recommeddOrganizationId,jdbcType=VARCHAR},
+      recommedd_organization_name = #{record.recommeddOrganizationName,jdbcType=VARCHAR},
+      cost_organization_commission = #{record.costOrganizationCommission,jdbcType=DECIMAL},
+      cost_acquisition_charge = #{record.costAcquisitionCharge,jdbcType=DECIMAL},
+      pay_amount = #{record.payAmount,jdbcType=DECIMAL},
+      discount_amount = #{record.discountAmount,jdbcType=DECIMAL},
+      total_amount = #{record.totalAmount,jdbcType=DECIMAL},
+      service_type = #{record.serviceType,jdbcType=INTEGER},
+      sample_no = #{record.sampleNo,jdbcType=VARCHAR},
+      sample_collect_date = #{record.sampleCollectDate,jdbcType=TIMESTAMP},
+      report_type = #{record.reportType,jdbcType=INTEGER},
+      report_cost = #{record.reportCost,jdbcType=DECIMAL},
+      report_img = #{record.reportImg,jdbcType=VARCHAR},
+      report_date = #{record.reportDate,jdbcType=TIMESTAMP},
+      doctor_name = #{record.doctorName,jdbcType=VARCHAR},
+      doctor_phone = #{record.doctorPhone,jdbcType=VARCHAR},
+      good_status = #{record.goodStatus,jdbcType=INTEGER},
+      exception_status = #{record.exceptionStatus,jdbcType=INTEGER},
+      exception_reason = #{record.exceptionReason,jdbcType=INTEGER},
+      exception_solution = #{record.exceptionSolution,jdbcType=INTEGER},
+      exception_solve_time = #{record.exceptionSolveTime,jdbcType=TIMESTAMP},
+      refund_status = #{record.refundStatus,jdbcType=INTEGER},
+      refund_reason = #{record.refundReason,jdbcType=INTEGER},
+      refund_amount = #{record.refundAmount,jdbcType=DECIMAL},
+      refund_remark = #{record.refundRemark,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      collector_staff_id = #{record.collectorStaffId,jdbcType=VARCHAR},
+      pdf_url = #{record.pdfUrl,jdbcType=VARCHAR},
+      pdf_merge_url = #{record.pdfMergeUrl,jdbcType=VARCHAR},
+      message_status = #{record.messageStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tclab.weixinappletservice.pojo.AppletGood">
+    update applet_good
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodNo != null">
+        good_no = #{goodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantId != null">
+        participant_id = #{participantId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageId != null">
+        package_id = #{packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageName != null">
+        package_name = #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="packageNum != null">
+        package_num = #{packageNum,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionId != null">
+        acquisition_id = #{acquisitionId,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionName != null">
+        acquisition_name = #{acquisitionName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodApplyDate != null">
+        good_apply_date = #{goodApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodCurrentApplyDate != null">
+        good_current_apply_date = #{goodCurrentApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodCompleteApplyDate != null">
+        good_complete_apply_date = #{goodCompleteApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="staffId != null">
+        staff_id = #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffPhone != null">
+        staff_phone = #{staffPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="staffName != null">
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="costStaffCommission != null">
+        cost_staff_commission = #{costStaffCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="acquisitionDepartmentId != null">
+        acquisition_department_id = #{acquisitionDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionDepartmentName != null">
+        acquisition_department_name = #{acquisitionDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="costDepartmentCommission != null">
+        cost_department_commission = #{costDepartmentCommission,jdbcType=VARCHAR},
+      </if>
+      <if test="recommeddOrganizationId != null">
+        recommedd_organization_id = #{recommeddOrganizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="recommeddOrganizationName != null">
+        recommedd_organization_name = #{recommeddOrganizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="costOrganizationCommission != null">
+        cost_organization_commission = #{costOrganizationCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="costAcquisitionCharge != null">
+        cost_acquisition_charge = #{costAcquisitionCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="payAmount != null">
+        pay_amount = #{payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="discountAmount != null">
+        discount_amount = #{discountAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null">
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceType != null">
+        service_type = #{serviceType,jdbcType=INTEGER},
+      </if>
+      <if test="sampleNo != null">
+        sample_no = #{sampleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleCollectDate != null">
+        sample_collect_date = #{sampleCollectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportType != null">
+        report_type = #{reportType,jdbcType=INTEGER},
+      </if>
+      <if test="reportCost != null">
+        report_cost = #{reportCost,jdbcType=DECIMAL},
+      </if>
+      <if test="reportImg != null">
+        report_img = #{reportImg,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDate != null">
+        report_date = #{reportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doctorName != null">
+        doctor_name = #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorPhone != null">
+        doctor_phone = #{doctorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="goodStatus != null">
+        good_status = #{goodStatus,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionStatus != null">
+        exception_status = #{exceptionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionReason != null">
+        exception_reason = #{exceptionReason,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionSolution != null">
+        exception_solution = #{exceptionSolution,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionSolveTime != null">
+        exception_solve_time = #{exceptionSolveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundStatus != null">
+        refund_status = #{refundStatus,jdbcType=INTEGER},
+      </if>
+      <if test="refundReason != null">
+        refund_reason = #{refundReason,jdbcType=INTEGER},
+      </if>
+      <if test="refundAmount != null">
+        refund_amount = #{refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="refundRemark != null">
+        refund_remark = #{refundRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectorStaffId != null">
+        collector_staff_id = #{collectorStaffId,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfUrl != null">
+        pdf_url = #{pdfUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfMergeUrl != null">
+        pdf_merge_url = #{pdfMergeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="messageStatus != null">
+        message_status = #{messageStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tclab.weixinappletservice.pojo.AppletGood">
+    update applet_good
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      good_no = #{goodNo,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      participant_id = #{participantId,jdbcType=VARCHAR},
+      package_id = #{packageId,jdbcType=VARCHAR},
+      package_name = #{packageName,jdbcType=VARCHAR},
+      package_num = #{packageNum,jdbcType=INTEGER},
+      acquisition_id = #{acquisitionId,jdbcType=VARCHAR},
+      acquisition_name = #{acquisitionName,jdbcType=VARCHAR},
+      good_apply_date = #{goodApplyDate,jdbcType=TIMESTAMP},
+      good_current_apply_date = #{goodCurrentApplyDate,jdbcType=TIMESTAMP},
+      good_complete_apply_date = #{goodCompleteApplyDate,jdbcType=TIMESTAMP},
+      staff_id = #{staffId,jdbcType=VARCHAR},
+      staff_phone = #{staffPhone,jdbcType=VARCHAR},
+      staff_name = #{staffName,jdbcType=VARCHAR},
+      cost_staff_commission = #{costStaffCommission,jdbcType=DECIMAL},
+      acquisition_department_id = #{acquisitionDepartmentId,jdbcType=VARCHAR},
+      acquisition_department_name = #{acquisitionDepartmentName,jdbcType=VARCHAR},
+      cost_department_commission = #{costDepartmentCommission,jdbcType=VARCHAR},
+      recommedd_organization_id = #{recommeddOrganizationId,jdbcType=VARCHAR},
+      recommedd_organization_name = #{recommeddOrganizationName,jdbcType=VARCHAR},
+      cost_organization_commission = #{costOrganizationCommission,jdbcType=DECIMAL},
+      cost_acquisition_charge = #{costAcquisitionCharge,jdbcType=DECIMAL},
+      pay_amount = #{payAmount,jdbcType=DECIMAL},
+      discount_amount = #{discountAmount,jdbcType=DECIMAL},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      service_type = #{serviceType,jdbcType=INTEGER},
+      sample_no = #{sampleNo,jdbcType=VARCHAR},
+      sample_collect_date = #{sampleCollectDate,jdbcType=TIMESTAMP},
+      report_type = #{reportType,jdbcType=INTEGER},
+      report_cost = #{reportCost,jdbcType=DECIMAL},
+      report_img = #{reportImg,jdbcType=VARCHAR},
+      report_date = #{reportDate,jdbcType=TIMESTAMP},
+      doctor_name = #{doctorName,jdbcType=VARCHAR},
+      doctor_phone = #{doctorPhone,jdbcType=VARCHAR},
+      good_status = #{goodStatus,jdbcType=INTEGER},
+      exception_status = #{exceptionStatus,jdbcType=INTEGER},
+      exception_reason = #{exceptionReason,jdbcType=INTEGER},
+      exception_solution = #{exceptionSolution,jdbcType=INTEGER},
+      exception_solve_time = #{exceptionSolveTime,jdbcType=TIMESTAMP},
+      refund_status = #{refundStatus,jdbcType=INTEGER},
+      refund_reason = #{refundReason,jdbcType=INTEGER},
+      refund_amount = #{refundAmount,jdbcType=DECIMAL},
+      refund_remark = #{refundRemark,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      collector_staff_id = #{collectorStaffId,jdbcType=VARCHAR},
+      pdf_url = #{pdfUrl,jdbcType=VARCHAR},
+      pdf_merge_url = #{pdfMergeUrl,jdbcType=VARCHAR},
+      message_status = #{messageStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectGoodPackageByNo" parameterType="com.tclab.weixinappletservice.model.query.QueryNoParam" resultType="com.tclab.weixinappletservice.model.result.GoodInfoByNoResult">
+    SELECT
+    b.order_no AS orderNo,
+    b.good_no AS goodNo,
+    b.package_id AS packageId,
+    c.package_name AS packageName,
+    c.package_equipment AS packageEquipment,
+    c.package_special_requirement AS packageSpecialRequirement,
+    c.package_remark AS packageRemark,
+    c.storage_condition AS storageCondition,
+    c.package_source_id AS packageSourceId,
+    c.report_time_desc AS reportTimeDesc,
+    b.report_date AS reportDate,
+    b.sample_no AS barcode,
+    b.pdf_url AS pdfurl,
+    b.pdf_merge_url AS pdfmergeurl
+    FROM
+    (
+    SELECT
+    a.order_no,
+    a.good_no,
+    a.package_id,
+    a.sample_no,
+    a.report_date,
+    a.pdf_url,
+    a.pdf_merge_url
+    FROM
+    applet_good a
+    WHERE
+    a.del_flag = 0
+    <if test="orderNo != null and orderNo != ''">
+      AND
+      a.order_no = #{orderNo,jdbcType=VARCHAR}
+    </if>
+    <if test="goodNo != null and goodNo != ''">
+      AND
+      a.good_no = #{goodNo,jdbcType=VARCHAR}
+    </if>
+    <if test="participantId != null and participantId != ''">
+      AND
+      a.participant_id = #{participantId,jdbcType=VARCHAR}
+    </if>
+    ) b JOIN applet_package c
+    ON
+    b.package_id = c.package_id
+  </select>
+
+  <select id="selectOutGoodPackageByNo" parameterType="com.tclab.weixinappletservice.model.query.QueryNoParam" resultType="com.tclab.weixinappletservice.model.result.GoodInfoByNoResult">
+    SELECT
+    b.order_no AS orderNo,
+    b.good_no AS goodNo,
+    b.package_id AS packageId,
+    c.package_name AS packageName,
+    c.package_equipment AS packageEquipment,
+    c.package_special_requirement AS packageSpecialRequirement,
+    c.package_remark AS packageRemark,
+    c.storage_condition AS storageCondition,
+    c.package_source_id AS packageSourceId,
+    c.report_time_desc AS reportTimeDesc,
+    b.report_date AS reportDate,
+    b.sample_no AS barcode
+    FROM
+    (
+    SELECT
+    a.order_no,
+    a.good_no,
+    a.package_id,
+    a.sample_no,
+    a.report_date
+    FROM
+    applet_good a
+    WHERE
+    a.del_flag = 0
+    AND a.good_status='7'
+    <if test="orderNo != null and orderNo != ''">
+      AND
+      a.order_no = #{orderNo,jdbcType=VARCHAR}
+    </if>
+    <if test="goodNo != null and goodNo != ''">
+      AND
+      a.good_no = #{goodNo,jdbcType=VARCHAR}
+    </if>
+    <if test="participantId != null and participantId != ''">
+      AND
+      a.participant_id = #{participantId,jdbcType=VARCHAR}
+    </if>
+    ) b JOIN applet_package c
+    ON
+    b.package_id = c.package_id
+  </select>
+
+  <select id="getGoodExtendVoWithParticipant" parameterType="com.tclab.weixinappletservice.model.query.GoodStaffParam" resultType="com.tclab.weixinappletservice.model.result.GoodExtendBaseVo">
+    SELECT
+    m.goodNo,
+    m.orderNo,
+    m.packageId,
+    m.packageName,
+    m.goodStatus,
+    date_format(m.goodApplyDate,'%Y/%m/%d %H:%i') as goodApplyDate,
+    m.payAmount,
+    n.orderStatus,
+    n.participantId,
+    n.participantName,
+    n.participantPhone,
+    n.participantIdCard
+    FROM
+    (
+    SELECT
+    a.good_no AS goodNo,
+    a.order_no AS orderNo,
+    a.package_id AS packageId,
+    a.package_name AS packageName,
+    a.good_status AS goodStatus,
+    a.good_apply_date AS goodApplyDate,
+    a.pay_amount AS payAmount
+    FROM
+    applet_good a
+    WHERE
+    1=1
+    <if test="staffId != null and staffId != ''">
+      AND
+      staff_id = #{staffId,jdbcType=VARCHAR}
+    </if>
+    ) m
+    INNER JOIN
+    (
+    SELECT
+    b.order_no AS orderNo,
+    b.order_status AS orderStatus,
+    b.participant_id AS participantId,
+    b.participant_name AS participantName,
+    b.participant_phone AS participantPhone,
+    b.participant_id_card AS participantIdCard
+    FROM
+    applet_order b
+    WHERE
+    1=1
+    <if test="queryParam != null and queryParam !=''">
+      AND
+      (
+      b.participant_name LIKE CONCAT('%', #{queryParam,jdbcType=VARCHAR}, '%')
+      OR
+      b.participant_phone LIKE CONCAT('%', #{queryParam,jdbcType=VARCHAR}, '%')
+      )
+    </if>
+    ) n
+    ON m.orderNo = n.orderNo
+  </select>
+
+  <select id="selectDoctorRecommendNumByDate" parameterType="com.tclab.weixinappletservice.model.query.QueryDoctorRecommendNumParam" resultType="com.tclab.weixinappletservice.model.result.DoctorRecommendResult">
+    SELECT
+    package_id as packageId, COUNT(*) as recommendNum
+    FROM
+    applet_good
+    WHERE
+    package_id
+    IN
+    (
+    SELECT
+    package_id
+    FROM
+    applet_good
+    WHERE
+    sample_collect_date is not null
+    <if test="Month != null and Month !=''">
+      AND
+      DATE_FORMAT(sample_collect_date,"%Y/%m") = #{Month,jdbcType=VARCHAR}
+    </if>
+    <if test="doctorPhone != null and doctorPhone !=''">
+      AND
+      staff_phone = #{doctorPhone,jdbcType=VARCHAR}
+    </if>
+    )
+    AND
+    sample_collect_date is not null
+    <if test="Month != null and Month !=''">
+      AND
+      DATE_FORMAT(sample_collect_date,"%Y/%m") = #{Month,jdbcType=VARCHAR}
+    </if>
+    <if test="doctorPhone != null and doctorPhone !=''">
+      AND
+      staff_phone = #{doctorPhone,jdbcType=VARCHAR}
+    </if>
+    GROUP BY package_id
+  </select>
+
+
+  <select id="selectDoctorRecommendByDate" parameterType="com.tclab.weixinappletservice.model.query.QueryDoctorRecommendNumParam" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    applet_good
+    WHERE
+    1=1
+    <if test="packageId != null and packageId !=''">
+      AND
+      package_id = #{packageId,jdbcType=VARCHAR}
+    </if>
+    <if test="packageName != null and packageName !=''">
+      AND
+      package_name = #{packageName,jdbcType=VARCHAR}
+    </if>
+    AND
+    sample_collect_date is not null
+    <if test="Month != null and Month !=''">
+      AND
+      DATE_FORMAT(sample_collect_date,"%Y/%m") = #{Month,jdbcType=VARCHAR}
+    </if>
+    <if test="doctorPhone != null and doctorPhone !=''">
+      AND
+      staff_phone = #{doctorPhone,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectDoctorRecommendByDateNew" parameterType="com.tclab.weixinappletservice.model.query.QueryDoctorRecommendNumParam" resultType="com.tclab.weixinappletservice.model.result.ShulanParticipantListVo">
+    SELECT
+    a.order_no AS orderNo,
+    a.good_no AS goodNo,
+    a.sample_no AS sampleNo,
+    DATE_FORMAT(a.sample_collect_date,"%Y/%m") AS sampleCollectDate,
+    b.participant_name AS participantName,
+    b.participant_id AS participantId,
+    a.create_date AS createDate
+    FROM
+    applet_good a
+    LEFT JOIN applet_order_participant b
+    ON a.participant_id = b.participant_id
+    WHERE
+    1=1
+    <if test="packageId != null and packageId != ''">
+      AND
+      a.package_id = #{packageId,jdbcType=VARCHAR}
+    </if>
+    <if test="packageName != null and packageName !=''">
+      AND
+      package_name = #{packageName,jdbcType=VARCHAR}
+    </if>
+    AND
+    a.sample_collect_date is not null
+    <if test="Month != null and Month !=''">
+      AND
+      DATE_FORMAT(a.sample_collect_date,"%Y/%m") = #{Month,jdbcType=VARCHAR}
+    </if>
+    <if test="doctorPhone != null and doctorPhone !=''">
+      AND
+      a.staff_phone = #{doctorPhone,jdbcType=VARCHAR}
+    </if>
+    <if test="queryParam != null and queryParam !=''">
+      AND(
+      b.participant_name LIKE CONCAT('%', #{queryParam,jdbcType=VARCHAR}, '%')
+      OR
+      b.participant_phone LIKE CONCAT('%', #{queryParam,jdbcType=VARCHAR}, '%')
+      )
+    </if>
+  </select>
+
+  <select id="selectReportList" parameterType="com.tclab.weixinappletservice.model.query.QueryDoctorRecommendNumParam" resultType="com.tclab.weixinappletservice.model.result.ShulanRecommendListNewVo">
+    SELECT
+    a.order_no AS orderNo,
+    a.good_no AS goodNo,
+    a.sample_no AS sampleNo,
+    DATE_FORMAT(a.sample_collect_date,"%Y/%m") AS sampleCollectDate,
+    a.package_id AS packageId,
+    a.package_name AS packageName,
+    b.participant_name AS participantName,
+    b.participant_phone AS participantPhone,
+    b.participant_sex AS participantSex,
+    b.participant_age AS participantAge,
+    a.doctor_name AS interpretName,
+    a.doctor_phone AS interpretPhone,
+    a.doctor_name AS doctorName,
+    a.doctor_phone AS doctorPhone,
+    a.report_img AS reportImg,
+    a.report_date AS reportDateForNum,
+    a.good_status AS goodStatus
+    FROM
+    applet_good a
+    LEFT JOIN applet_order_participant b
+    ON a.participant_id = b.participant_id
+    WHERE
+    1=1
+    <if test="packageId != null and packageId != ''">
+      AND
+      a.package_id = #{packageId,jdbcType=VARCHAR}
+    </if>
+    <if test="packageName != null and packageName !=''">
+      AND
+      package_name = #{packageName,jdbcType=VARCHAR}
+    </if>
+    AND
+    a.sample_collect_date is not null
+    <if test="Month != null and Month !=''">
+      AND
+      DATE_FORMAT(a.sample_collect_date,"%Y/%m") = #{Month,jdbcType=VARCHAR}
+    </if>
+    <if test="doctorPhone != null and doctorPhone !=''">
+      AND
+      a.staff_phone = #{doctorPhone,jdbcType=VARCHAR}
+    </if>
+
+    <if test="goodStatusList != null and goodStatusList.size > 0">
+      AND
+      a.good_status
+      IN
+      <foreach collection="goodStatusList" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    <if test="queryParam != null and queryParam !=''">
+      AND(
+      b.participant_name LIKE CONCAT('%', #{queryParam,jdbcType=VARCHAR}, '%')
+      OR
+      b.participant_phone LIKE CONCAT('%', #{queryParam,jdbcType=VARCHAR}, '%')
+      )
+    </if>
+  </select>
+
+  <select id="selectTestingGood" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM applet_good
+    WHERE
+    good_status = 4
+    AND
+    pdf_merge_url IS NULL
+    AND
+    sample_no IS NOT NULL
+    AND
+    del_flag = 0
+    AND
+    order_no
+    IN
+    (
+    SELECT
+    order_no
+    FROM applet_order
+    WHERE del_flag = 0
+    AND order_status = 2
+    AND logistics_status = 3
+    )
+    ORDER BY  good_complete_apply_date ASC
+  </select>
+
+  <select id="checkBindGood" parameterType="com.tclab.weixinappletservice.model.query.QueryNoParam" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    applet_good
+    WHERE
+    1=1
+    <if test="goodNo != null and goodNo != ''">
+      AND
+      good_no = #{goodNo,jdbcType=VARCHAR}
+    </if>
+    AND
+    service_type IN (1,2)
+    AND
+    good_status IN (1,3)
+    AND
+    exception_status IN (0,2)
+    AND
+    refund_status IN (0,4)
+    AND
+    del_flag = 0
+    AND
+    order_no
+    IN
+    (
+    SELECT
+    order_no
+    FROM
+    applet_order
+    WHERE
+    1=1
+    <if test="orderNo != null and orderNo != ''">
+      AND
+      order_no = #{orderNo,jdbcType=VARCHAR}
+    </if>
+    AND
+    order_status IN (1,2)
+    AND
+    service_type IN (1,2)
+    AND
+    pay_status = 2
+    AND
+    write_off_status IN (0,1,2)
+    AND
+    refund_status IN (0,4)
+    AND
+    logistics_status IN (0,1)
+    AND
+    exception_status IN (0,2)
+    AND
+    order_cancel_status = 0
+    AND
+    del_flag = 0
+    )
+  </select>
+
+  <select id="checkCancelGood" parameterType="com.tclab.weixinappletservice.model.query.QueryNoParam" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    applet_good
+    WHERE
+    1=1
+    <if test="goodNo != null and goodNo != ''">
+      AND
+      good_no = #{goodNo,jdbcType=VARCHAR}
+    </if>
+    AND
+    service_type IN (1,2)
+    AND
+    good_status = 1
+    AND
+    exception_status IN (0,2)
+    AND
+    refund_status IN (0,4)
+    AND
+    del_flag = 0
+    AND
+    order_no
+    IN
+    (
+    SELECT
+    order_no
+    FROM
+    applet_order
+    WHERE
+    1=1
+    <if test="orderNo != null and orderNo != ''">
+      AND
+      order_no = #{orderNo,jdbcType=VARCHAR}
+    </if>
+    AND
+    order_status = 1
+    AND
+    service_type IN (1,2)
+    AND
+    pay_status = 2
+    AND
+    write_off_status IN (0,1,2)
+    AND
+    refund_status IN (0,4)
+    AND
+    logistics_status = 0
+    AND
+    exception_status IN (0,2)
+    AND
+    order_cancel_status = 0
+    AND
+    del_flag = 0
+    )
+  </select>
+
+  <select id="checkDelayGood" parameterType="com.tclab.weixinappletservice.model.query.QueryNoParam" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    applet_good
+    WHERE
+    1=1
+    <if test="goodNo != null and goodNo != ''">
+      AND
+      good_no = #{goodNo,jdbcType=VARCHAR}
+    </if>
+    AND
+    service_type IN (1,2)
+    AND
+    good_status = 1
+    AND
+    exception_status IN (0,2)
+    AND
+    refund_status IN (0,4)
+    AND
+    del_flag = 0
+    AND
+    order_no
+    IN
+    (
+    SELECT
+    order_no
+    FROM
+    applet_order
+    WHERE
+    1=1
+    <if test="orderNo != null and orderNo != ''">
+      AND
+      order_no = #{orderNo,jdbcType=VARCHAR}
+    </if>
+    AND
+    order_status = 1
+    AND
+    service_type IN (1,2)
+    AND
+    pay_status = 2
+    AND
+    write_off_status IN (0,1)
+    AND
+    refund_status IN (0,4)
+    AND
+    logistics_status = 0
+    AND
+    exception_status IN (0,2)
+    AND
+    order_cancel_status = 0
+    AND
+    del_flag = 0
+    )
+  </select>
+
+  <select id="selectByInterpretId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    applet_good a
+    WHERE
+    a.good_no IN (
+    SELECT
+    b.good_no
+    FROM
+    applet_interpret b
+    WHERE
+    b.interpret_id = #{interpretId,jdbcType=VARCHAR}
+    )
+  </select>
+</mapper>

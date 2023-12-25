@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletAcquisitionMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletAcquisition">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="acquisition_id" jdbcType="VARCHAR" property="acquisitionId" />
+    <result column="acquisition_name" jdbcType="VARCHAR" property="acquisitionName" />
+    <result column="acquisition_phone" jdbcType="VARCHAR" property="acquisitionPhone" />
+    <result column="acquisition_address" jdbcType="VARCHAR" property="acquisitionAddress" />
+    <result column="acquisition_logo" jdbcType="VARCHAR" property="acquisitionLogo" />
+    <result column="acquisition_license" jdbcType="VARCHAR" property="acquisitionLicense" />
+    <result column="acquisition_business_licence" jdbcType="VARCHAR" property="acquisitionBusinessLicence" />
+    <result column="acquisition_info" jdbcType="VARCHAR" property="acquisitionInfo" />
+    <result column="acquisition_message" jdbcType="VARCHAR" property="acquisitionMessage" />
+    <result column="acquisition_office_time" jdbcType="VARCHAR" property="acquisitionOfficeTime" />
+    <result column="acquisition_score" jdbcType="REAL" property="acquisitionScore" />
+    <result column="acquisition_recommendation" jdbcType="INTEGER" property="acquisitionRecommendation" />
+    <result column="acquisition_label" jdbcType="VARCHAR" property="acquisitionLabel" />
+    <result column="acquisition_remark" jdbcType="VARCHAR" property="acquisitionRemark" />
+    <result column="acquisition_priority" jdbcType="INTEGER" property="acquisitionPriority" />
+    <result column="acquisition_coordinate" jdbcType="VARCHAR" property="acquisitionCoordinate" />
+    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="area_id" jdbcType="VARCHAR" property="areaId" />
+    <result column="area_name" jdbcType="VARCHAR" property="areaName" />
+    <result column="clerk_id" jdbcType="VARCHAR" property="clerkId" />
+    <result column="acquisition_collect_type" jdbcType="INTEGER" property="acquisitionCollectType" />
+    <result column="acquisition_sample_type" jdbcType="INTEGER" property="acquisitionSampleType" />
+    <result column="protocol_img" jdbcType="VARCHAR" property="protocolImg" />
+    <result column="commission_flag" jdbcType="INTEGER" property="commissionFlag" />
+    <result column="director_name" jdbcType="VARCHAR" property="directorName" />
+    <result column="director_phone" jdbcType="VARCHAR" property="directorPhone" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="acquisition_status" jdbcType="INTEGER" property="acquisitionStatus" />
+    <result column="verify_flag" jdbcType="INTEGER" property="verifyFlag" />
+    <result column="logistics_flag" jdbcType="INTEGER" property="logisticsFlag" />
+    <result column="acquisition_type" jdbcType="INTEGER" property="acquisitionType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, acquisition_id, acquisition_name, acquisition_phone, acquisition_address, acquisition_logo, 
+    acquisition_license, acquisition_business_licence, acquisition_info, acquisition_message, 
+    acquisition_office_time, acquisition_score, acquisition_recommendation, acquisition_label, 
+    acquisition_remark, acquisition_priority, acquisition_coordinate, longitude, latitude, 
+    area_id, area_name, clerk_id, acquisition_collect_type, acquisition_sample_type, 
+    protocol_img, commission_flag, director_name, director_phone, del_flag, create_date, 
+    update_date, acquisition_status, verify_flag, logistics_flag, acquisition_type
+  </sql>
+  <select id="selectByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletAcquisitionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from applet_acquisition
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applet_acquisition
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_acquisition
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletAcquisitionExample">
+    delete from applet_acquisition
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletAcquisition">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_acquisition (acquisition_id, acquisition_name, acquisition_phone, 
+      acquisition_address, acquisition_logo, acquisition_license, 
+      acquisition_business_licence, acquisition_info, 
+      acquisition_message, acquisition_office_time, 
+      acquisition_score, acquisition_recommendation, 
+      acquisition_label, acquisition_remark, acquisition_priority, 
+      acquisition_coordinate, longitude, latitude, 
+      area_id, area_name, clerk_id, 
+      acquisition_collect_type, acquisition_sample_type, 
+      protocol_img, commission_flag, director_name, 
+      director_phone, del_flag, create_date, 
+      update_date, acquisition_status, verify_flag, 
+      logistics_flag, acquisition_type)
+    values (#{acquisitionId,jdbcType=VARCHAR}, #{acquisitionName,jdbcType=VARCHAR}, #{acquisitionPhone,jdbcType=VARCHAR}, 
+      #{acquisitionAddress,jdbcType=VARCHAR}, #{acquisitionLogo,jdbcType=VARCHAR}, #{acquisitionLicense,jdbcType=VARCHAR}, 
+      #{acquisitionBusinessLicence,jdbcType=VARCHAR}, #{acquisitionInfo,jdbcType=VARCHAR}, 
+      #{acquisitionMessage,jdbcType=VARCHAR}, #{acquisitionOfficeTime,jdbcType=VARCHAR}, 
+      #{acquisitionScore,jdbcType=REAL}, #{acquisitionRecommendation,jdbcType=INTEGER}, 
+      #{acquisitionLabel,jdbcType=VARCHAR}, #{acquisitionRemark,jdbcType=VARCHAR}, #{acquisitionPriority,jdbcType=INTEGER}, 
+      #{acquisitionCoordinate,jdbcType=VARCHAR}, #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, 
+      #{areaId,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, #{clerkId,jdbcType=VARCHAR}, 
+      #{acquisitionCollectType,jdbcType=INTEGER}, #{acquisitionSampleType,jdbcType=INTEGER}, 
+      #{protocolImg,jdbcType=VARCHAR}, #{commissionFlag,jdbcType=INTEGER}, #{directorName,jdbcType=VARCHAR}, 
+      #{directorPhone,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{acquisitionStatus,jdbcType=INTEGER}, #{verifyFlag,jdbcType=INTEGER}, 
+      #{logisticsFlag,jdbcType=INTEGER}, #{acquisitionType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tclab.weixinappletservice.pojo.AppletAcquisition">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_acquisition
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="acquisitionId != null">
+        acquisition_id,
+      </if>
+      <if test="acquisitionName != null">
+        acquisition_name,
+      </if>
+      <if test="acquisitionPhone != null">
+        acquisition_phone,
+      </if>
+      <if test="acquisitionAddress != null">
+        acquisition_address,
+      </if>
+      <if test="acquisitionLogo != null">
+        acquisition_logo,
+      </if>
+      <if test="acquisitionLicense != null">
+        acquisition_license,
+      </if>
+      <if test="acquisitionBusinessLicence != null">
+        acquisition_business_licence,
+      </if>
+      <if test="acquisitionInfo != null">
+        acquisition_info,
+      </if>
+      <if test="acquisitionMessage != null">
+        acquisition_message,
+      </if>
+      <if test="acquisitionOfficeTime != null">
+        acquisition_office_time,
+      </if>
+      <if test="acquisitionScore != null">
+        acquisition_score,
+      </if>
+      <if test="acquisitionRecommendation != null">
+        acquisition_recommendation,
+      </if>
+      <if test="acquisitionLabel != null">
+        acquisition_label,
+      </if>
+      <if test="acquisitionRemark != null">
+        acquisition_remark,
+      </if>
+      <if test="acquisitionPriority != null">
+        acquisition_priority,
+      </if>
+      <if test="acquisitionCoordinate != null">
+        acquisition_coordinate,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="areaName != null">
+        area_name,
+      </if>
+      <if test="clerkId != null">
+        clerk_id,
+      </if>
+      <if test="acquisitionCollectType != null">
+        acquisition_collect_type,
+      </if>
+      <if test="acquisitionSampleType != null">
+        acquisition_sample_type,
+      </if>
+      <if test="protocolImg != null">
+        protocol_img,
+      </if>
+      <if test="commissionFlag != null">
+        commission_flag,
+      </if>
+      <if test="directorName != null">
+        director_name,
+      </if>
+      <if test="directorPhone != null">
+        director_phone,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="acquisitionStatus != null">
+        acquisition_status,
+      </if>
+      <if test="verifyFlag != null">
+        verify_flag,
+      </if>
+      <if test="logisticsFlag != null">
+        logistics_flag,
+      </if>
+      <if test="acquisitionType != null">
+        acquisition_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="acquisitionId != null">
+        #{acquisitionId,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionName != null">
+        #{acquisitionName,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionPhone != null">
+        #{acquisitionPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionAddress != null">
+        #{acquisitionAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionLogo != null">
+        #{acquisitionLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionLicense != null">
+        #{acquisitionLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionBusinessLicence != null">
+        #{acquisitionBusinessLicence,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionInfo != null">
+        #{acquisitionInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionMessage != null">
+        #{acquisitionMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionOfficeTime != null">
+        #{acquisitionOfficeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionScore != null">
+        #{acquisitionScore,jdbcType=REAL},
+      </if>
+      <if test="acquisitionRecommendation != null">
+        #{acquisitionRecommendation,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionLabel != null">
+        #{acquisitionLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionRemark != null">
+        #{acquisitionRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionPriority != null">
+        #{acquisitionPriority,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionCoordinate != null">
+        #{acquisitionCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="clerkId != null">
+        #{clerkId,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionCollectType != null">
+        #{acquisitionCollectType,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionSampleType != null">
+        #{acquisitionSampleType,jdbcType=INTEGER},
+      </if>
+      <if test="protocolImg != null">
+        #{protocolImg,jdbcType=VARCHAR},
+      </if>
+      <if test="commissionFlag != null">
+        #{commissionFlag,jdbcType=INTEGER},
+      </if>
+      <if test="directorName != null">
+        #{directorName,jdbcType=VARCHAR},
+      </if>
+      <if test="directorPhone != null">
+        #{directorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acquisitionStatus != null">
+        #{acquisitionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="verifyFlag != null">
+        #{verifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsFlag != null">
+        #{logisticsFlag,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionType != null">
+        #{acquisitionType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletAcquisitionExample" resultType="java.lang.Long">
+    select count(*) from applet_acquisition
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_acquisition
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.acquisitionId != null">
+        acquisition_id = #{record.acquisitionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionName != null">
+        acquisition_name = #{record.acquisitionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionPhone != null">
+        acquisition_phone = #{record.acquisitionPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionAddress != null">
+        acquisition_address = #{record.acquisitionAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionLogo != null">
+        acquisition_logo = #{record.acquisitionLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionLicense != null">
+        acquisition_license = #{record.acquisitionLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionBusinessLicence != null">
+        acquisition_business_licence = #{record.acquisitionBusinessLicence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionInfo != null">
+        acquisition_info = #{record.acquisitionInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionMessage != null">
+        acquisition_message = #{record.acquisitionMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionOfficeTime != null">
+        acquisition_office_time = #{record.acquisitionOfficeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionScore != null">
+        acquisition_score = #{record.acquisitionScore,jdbcType=REAL},
+      </if>
+      <if test="record.acquisitionRecommendation != null">
+        acquisition_recommendation = #{record.acquisitionRecommendation,jdbcType=INTEGER},
+      </if>
+      <if test="record.acquisitionLabel != null">
+        acquisition_label = #{record.acquisitionLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionRemark != null">
+        acquisition_remark = #{record.acquisitionRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionPriority != null">
+        acquisition_priority = #{record.acquisitionPriority,jdbcType=INTEGER},
+      </if>
+      <if test="record.acquisitionCoordinate != null">
+        acquisition_coordinate = #{record.acquisitionCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null">
+        longitude = #{record.longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.latitude != null">
+        latitude = #{record.latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.areaId != null">
+        area_id = #{record.areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaName != null">
+        area_name = #{record.areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clerkId != null">
+        clerk_id = #{record.clerkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquisitionCollectType != null">
+        acquisition_collect_type = #{record.acquisitionCollectType,jdbcType=INTEGER},
+      </if>
+      <if test="record.acquisitionSampleType != null">
+        acquisition_sample_type = #{record.acquisitionSampleType,jdbcType=INTEGER},
+      </if>
+      <if test="record.protocolImg != null">
+        protocol_img = #{record.protocolImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commissionFlag != null">
+        commission_flag = #{record.commissionFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.directorName != null">
+        director_name = #{record.directorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.directorPhone != null">
+        director_phone = #{record.directorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.acquisitionStatus != null">
+        acquisition_status = #{record.acquisitionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.verifyFlag != null">
+        verify_flag = #{record.verifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.logisticsFlag != null">
+        logistics_flag = #{record.logisticsFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.acquisitionType != null">
+        acquisition_type = #{record.acquisitionType,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_acquisition
+    set id = #{record.id,jdbcType=INTEGER},
+      acquisition_id = #{record.acquisitionId,jdbcType=VARCHAR},
+      acquisition_name = #{record.acquisitionName,jdbcType=VARCHAR},
+      acquisition_phone = #{record.acquisitionPhone,jdbcType=VARCHAR},
+      acquisition_address = #{record.acquisitionAddress,jdbcType=VARCHAR},
+      acquisition_logo = #{record.acquisitionLogo,jdbcType=VARCHAR},
+      acquisition_license = #{record.acquisitionLicense,jdbcType=VARCHAR},
+      acquisition_business_licence = #{record.acquisitionBusinessLicence,jdbcType=VARCHAR},
+      acquisition_info = #{record.acquisitionInfo,jdbcType=VARCHAR},
+      acquisition_message = #{record.acquisitionMessage,jdbcType=VARCHAR},
+      acquisition_office_time = #{record.acquisitionOfficeTime,jdbcType=VARCHAR},
+      acquisition_score = #{record.acquisitionScore,jdbcType=REAL},
+      acquisition_recommendation = #{record.acquisitionRecommendation,jdbcType=INTEGER},
+      acquisition_label = #{record.acquisitionLabel,jdbcType=VARCHAR},
+      acquisition_remark = #{record.acquisitionRemark,jdbcType=VARCHAR},
+      acquisition_priority = #{record.acquisitionPriority,jdbcType=INTEGER},
+      acquisition_coordinate = #{record.acquisitionCoordinate,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=DOUBLE},
+      latitude = #{record.latitude,jdbcType=DOUBLE},
+      area_id = #{record.areaId,jdbcType=VARCHAR},
+      area_name = #{record.areaName,jdbcType=VARCHAR},
+      clerk_id = #{record.clerkId,jdbcType=VARCHAR},
+      acquisition_collect_type = #{record.acquisitionCollectType,jdbcType=INTEGER},
+      acquisition_sample_type = #{record.acquisitionSampleType,jdbcType=INTEGER},
+      protocol_img = #{record.protocolImg,jdbcType=VARCHAR},
+      commission_flag = #{record.commissionFlag,jdbcType=INTEGER},
+      director_name = #{record.directorName,jdbcType=VARCHAR},
+      director_phone = #{record.directorPhone,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      acquisition_status = #{record.acquisitionStatus,jdbcType=INTEGER},
+      verify_flag = #{record.verifyFlag,jdbcType=INTEGER},
+      logistics_flag = #{record.logisticsFlag,jdbcType=INTEGER},
+      acquisition_type = #{record.acquisitionType,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tclab.weixinappletservice.pojo.AppletAcquisition">
+    update applet_acquisition
+    <set>
+      <if test="acquisitionId != null">
+        acquisition_id = #{acquisitionId,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionName != null">
+        acquisition_name = #{acquisitionName,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionPhone != null">
+        acquisition_phone = #{acquisitionPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionAddress != null">
+        acquisition_address = #{acquisitionAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionLogo != null">
+        acquisition_logo = #{acquisitionLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionLicense != null">
+        acquisition_license = #{acquisitionLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionBusinessLicence != null">
+        acquisition_business_licence = #{acquisitionBusinessLicence,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionInfo != null">
+        acquisition_info = #{acquisitionInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionMessage != null">
+        acquisition_message = #{acquisitionMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionOfficeTime != null">
+        acquisition_office_time = #{acquisitionOfficeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionScore != null">
+        acquisition_score = #{acquisitionScore,jdbcType=REAL},
+      </if>
+      <if test="acquisitionRecommendation != null">
+        acquisition_recommendation = #{acquisitionRecommendation,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionLabel != null">
+        acquisition_label = #{acquisitionLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionRemark != null">
+        acquisition_remark = #{acquisitionRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionPriority != null">
+        acquisition_priority = #{acquisitionPriority,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionCoordinate != null">
+        acquisition_coordinate = #{acquisitionCoordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="clerkId != null">
+        clerk_id = #{clerkId,jdbcType=VARCHAR},
+      </if>
+      <if test="acquisitionCollectType != null">
+        acquisition_collect_type = #{acquisitionCollectType,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionSampleType != null">
+        acquisition_sample_type = #{acquisitionSampleType,jdbcType=INTEGER},
+      </if>
+      <if test="protocolImg != null">
+        protocol_img = #{protocolImg,jdbcType=VARCHAR},
+      </if>
+      <if test="commissionFlag != null">
+        commission_flag = #{commissionFlag,jdbcType=INTEGER},
+      </if>
+      <if test="directorName != null">
+        director_name = #{directorName,jdbcType=VARCHAR},
+      </if>
+      <if test="directorPhone != null">
+        director_phone = #{directorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acquisitionStatus != null">
+        acquisition_status = #{acquisitionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="verifyFlag != null">
+        verify_flag = #{verifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsFlag != null">
+        logistics_flag = #{logisticsFlag,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionType != null">
+        acquisition_type = #{acquisitionType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tclab.weixinappletservice.pojo.AppletAcquisition">
+    update applet_acquisition
+    set acquisition_id = #{acquisitionId,jdbcType=VARCHAR},
+      acquisition_name = #{acquisitionName,jdbcType=VARCHAR},
+      acquisition_phone = #{acquisitionPhone,jdbcType=VARCHAR},
+      acquisition_address = #{acquisitionAddress,jdbcType=VARCHAR},
+      acquisition_logo = #{acquisitionLogo,jdbcType=VARCHAR},
+      acquisition_license = #{acquisitionLicense,jdbcType=VARCHAR},
+      acquisition_business_licence = #{acquisitionBusinessLicence,jdbcType=VARCHAR},
+      acquisition_info = #{acquisitionInfo,jdbcType=VARCHAR},
+      acquisition_message = #{acquisitionMessage,jdbcType=VARCHAR},
+      acquisition_office_time = #{acquisitionOfficeTime,jdbcType=VARCHAR},
+      acquisition_score = #{acquisitionScore,jdbcType=REAL},
+      acquisition_recommendation = #{acquisitionRecommendation,jdbcType=INTEGER},
+      acquisition_label = #{acquisitionLabel,jdbcType=VARCHAR},
+      acquisition_remark = #{acquisitionRemark,jdbcType=VARCHAR},
+      acquisition_priority = #{acquisitionPriority,jdbcType=INTEGER},
+      acquisition_coordinate = #{acquisitionCoordinate,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      area_id = #{areaId,jdbcType=VARCHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      clerk_id = #{clerkId,jdbcType=VARCHAR},
+      acquisition_collect_type = #{acquisitionCollectType,jdbcType=INTEGER},
+      acquisition_sample_type = #{acquisitionSampleType,jdbcType=INTEGER},
+      protocol_img = #{protocolImg,jdbcType=VARCHAR},
+      commission_flag = #{commissionFlag,jdbcType=INTEGER},
+      director_name = #{directorName,jdbcType=VARCHAR},
+      director_phone = #{directorPhone,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      acquisition_status = #{acquisitionStatus,jdbcType=INTEGER},
+      verify_flag = #{verifyFlag,jdbcType=INTEGER},
+      logistics_flag = #{logisticsFlag,jdbcType=INTEGER},
+      acquisition_type = #{acquisitionType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateAcquisitionRecommendForAll">
+    UPDATE
+    applet_acquisition
+    SET
+    acquisition_recommendation =
+    (
+    SELECT
+    a.countForAcquisition
+    FROM
+    (SELECT
+    acquisition_id AS acquisitionId,count(*) AS countForAcquisition
+    FROM
+    applet_order
+    WHERE
+    del_flag = 0
+    AND
+    order_status = 3
+    AND
+    refund_status IN (0,4)
+    AND
+    order_cancel_status = 0
+    AND
+    write_off_status = 2
+    GROUP BY
+    acquisition_id) a
+    WHERE
+    acquisition_id = acquisitionId
+    )
+  </update>
+
+  <select id="selectOrderAcquisitionByDistance" parameterType="com.tclab.weixinappletservice.model.query.AcquisitionDistanceOrderParam" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM applet_acquisition
+    WHERE 1=1
+    AND
+    del_flag = 0
+    <if test="queryParam != null and queryParam != ''">
+      AND
+      acquisition_name LIKE CONCAT('%', #{queryParam,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="cityName != null and cityName != ''">
+      AND
+      area_name LIKE CONCAT('%', #{cityName,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="longt != null and lat != null">
+      ORDER BY
+      SQRT((longitude- #{longt,jdbcType=DOUBLE} )*(longitude- #{longt,jdbcType=DOUBLE} )+(latitude- #{lat,jdbcType=DOUBLE} )*(latitude- #{lat,jdbcType=DOUBLE} ))
+    </if>
+  </select>
+</mapper>

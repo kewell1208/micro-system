@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletImRelationMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletImRelation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="doctor_id" jdbcType="VARCHAR" property="doctorId" />
+    <result column="participant_id" jdbcType="VARCHAR" property="participantId" />
+    <result column="participant_comment" jdbcType="VARCHAR" property="participantComment" />
+    <result column="participant_score" jdbcType="DOUBLE" property="participantScore" />
+    <result column="participant_attention_flag" jdbcType="INTEGER" property="participantAttentionFlag" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_conversationID" jdbcType="VARCHAR" property="userConversationid" />
+    <result column="doctor_conversationID" jdbcType="VARCHAR" property="doctorConversationid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, doctor_id, participant_id, participant_comment, participant_score, participant_attention_flag, 
+    del_flag, create_date, update_date, user_id, user_conversationID, doctor_conversationID
+  </sql>
+  <select id="selectByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletImRelationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from applet_im_relation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applet_im_relation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_im_relation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletImRelationExample">
+    delete from applet_im_relation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletImRelation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_im_relation (doctor_id, participant_id, participant_comment, 
+      participant_score, participant_attention_flag, 
+      del_flag, create_date, update_date, 
+      user_id, user_conversationID, doctor_conversationID
+      )
+    values (#{doctorId,jdbcType=VARCHAR}, #{participantId,jdbcType=VARCHAR}, #{participantComment,jdbcType=VARCHAR}, 
+      #{participantScore,jdbcType=DOUBLE}, #{participantAttentionFlag,jdbcType=INTEGER}, 
+      #{delFlag,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=VARCHAR}, #{userConversationid,jdbcType=VARCHAR}, #{doctorConversationid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tclab.weixinappletservice.pojo.AppletImRelation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_im_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="doctorId != null">
+        doctor_id,
+      </if>
+      <if test="participantId != null">
+        participant_id,
+      </if>
+      <if test="participantComment != null">
+        participant_comment,
+      </if>
+      <if test="participantScore != null">
+        participant_score,
+      </if>
+      <if test="participantAttentionFlag != null">
+        participant_attention_flag,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userConversationid != null">
+        user_conversationID,
+      </if>
+      <if test="doctorConversationid != null">
+        doctor_conversationID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantId != null">
+        #{participantId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantComment != null">
+        #{participantComment,jdbcType=VARCHAR},
+      </if>
+      <if test="participantScore != null">
+        #{participantScore,jdbcType=DOUBLE},
+      </if>
+      <if test="participantAttentionFlag != null">
+        #{participantAttentionFlag,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userConversationid != null">
+        #{userConversationid,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorConversationid != null">
+        #{doctorConversationid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletImRelationExample" resultType="java.lang.Long">
+    select count(*) from applet_im_relation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_im_relation
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorId != null">
+        doctor_id = #{record.doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantId != null">
+        participant_id = #{record.participantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantComment != null">
+        participant_comment = #{record.participantComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.participantScore != null">
+        participant_score = #{record.participantScore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.participantAttentionFlag != null">
+        participant_attention_flag = #{record.participantAttentionFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userConversationid != null">
+        user_conversationID = #{record.userConversationid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorConversationid != null">
+        doctor_conversationID = #{record.doctorConversationid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_im_relation
+    set id = #{record.id,jdbcType=INTEGER},
+      doctor_id = #{record.doctorId,jdbcType=VARCHAR},
+      participant_id = #{record.participantId,jdbcType=VARCHAR},
+      participant_comment = #{record.participantComment,jdbcType=VARCHAR},
+      participant_score = #{record.participantScore,jdbcType=DOUBLE},
+      participant_attention_flag = #{record.participantAttentionFlag,jdbcType=INTEGER},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      user_conversationID = #{record.userConversationid,jdbcType=VARCHAR},
+      doctor_conversationID = #{record.doctorConversationid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tclab.weixinappletservice.pojo.AppletImRelation">
+    update applet_im_relation
+    <set>
+      <if test="doctorId != null">
+        doctor_id = #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantId != null">
+        participant_id = #{participantId,jdbcType=VARCHAR},
+      </if>
+      <if test="participantComment != null">
+        participant_comment = #{participantComment,jdbcType=VARCHAR},
+      </if>
+      <if test="participantScore != null">
+        participant_score = #{participantScore,jdbcType=DOUBLE},
+      </if>
+      <if test="participantAttentionFlag != null">
+        participant_attention_flag = #{participantAttentionFlag,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userConversationid != null">
+        user_conversationID = #{userConversationid,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorConversationid != null">
+        doctor_conversationID = #{doctorConversationid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tclab.weixinappletservice.pojo.AppletImRelation">
+    update applet_im_relation
+    set doctor_id = #{doctorId,jdbcType=VARCHAR},
+      participant_id = #{participantId,jdbcType=VARCHAR},
+      participant_comment = #{participantComment,jdbcType=VARCHAR},
+      participant_score = #{participantScore,jdbcType=DOUBLE},
+      participant_attention_flag = #{participantAttentionFlag,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=VARCHAR},
+      user_conversationID = #{userConversationid,jdbcType=VARCHAR},
+      doctor_conversationID = #{doctorConversationid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

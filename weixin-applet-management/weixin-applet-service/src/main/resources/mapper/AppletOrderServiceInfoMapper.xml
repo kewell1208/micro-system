@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletOrderServiceInfoMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletOrderServiceInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="service_info_id" jdbcType="VARCHAR" property="serviceInfoId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="address_province" jdbcType="VARCHAR" property="addressProvince" />
+    <result column="address_city" jdbcType="VARCHAR" property="addressCity" />
+    <result column="address_region" jdbcType="VARCHAR" property="addressRegion" />
+    <result column="service_info_address" jdbcType="VARCHAR" property="serviceInfoAddress" />
+    <result column="service_info_person" jdbcType="VARCHAR" property="serviceInfoPerson" />
+    <result column="service_info_phone" jdbcType="VARCHAR" property="serviceInfoPhone" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode" />
+    <result column="default_flag" jdbcType="INTEGER" property="defaultFlag" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, service_info_id, user_id, address_province, address_city, address_region, service_info_address, 
+    service_info_person, service_info_phone, zip_code, default_flag, del_flag, create_date, 
+    update_date
+  </sql>
+  <select id="selectByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletOrderServiceInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from applet_order_service_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applet_order_service_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_order_service_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletOrderServiceInfoExample">
+    delete from applet_order_service_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletOrderServiceInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_order_service_info (service_info_id, user_id, address_province, 
+      address_city, address_region, service_info_address, 
+      service_info_person, service_info_phone, zip_code, 
+      default_flag, del_flag, create_date, 
+      update_date)
+    values (#{serviceInfoId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{addressProvince,jdbcType=VARCHAR}, 
+      #{addressCity,jdbcType=VARCHAR}, #{addressRegion,jdbcType=VARCHAR}, #{serviceInfoAddress,jdbcType=VARCHAR}, 
+      #{serviceInfoPerson,jdbcType=VARCHAR}, #{serviceInfoPhone,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, 
+      #{defaultFlag,jdbcType=INTEGER}, #{delFlag,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tclab.weixinappletservice.pojo.AppletOrderServiceInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_order_service_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serviceInfoId != null">
+        service_info_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="addressProvince != null">
+        address_province,
+      </if>
+      <if test="addressCity != null">
+        address_city,
+      </if>
+      <if test="addressRegion != null">
+        address_region,
+      </if>
+      <if test="serviceInfoAddress != null">
+        service_info_address,
+      </if>
+      <if test="serviceInfoPerson != null">
+        service_info_person,
+      </if>
+      <if test="serviceInfoPhone != null">
+        service_info_phone,
+      </if>
+      <if test="zipCode != null">
+        zip_code,
+      </if>
+      <if test="defaultFlag != null">
+        default_flag,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serviceInfoId != null">
+        #{serviceInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="addressProvince != null">
+        #{addressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCity != null">
+        #{addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressRegion != null">
+        #{addressRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceInfoAddress != null">
+        #{serviceInfoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceInfoPerson != null">
+        #{serviceInfoPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceInfoPhone != null">
+        #{serviceInfoPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultFlag != null">
+        #{defaultFlag,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletOrderServiceInfoExample" resultType="java.lang.Long">
+    select count(*) from applet_order_service_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_order_service_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceInfoId != null">
+        service_info_id = #{record.serviceInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressProvince != null">
+        address_province = #{record.addressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressCity != null">
+        address_city = #{record.addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressRegion != null">
+        address_region = #{record.addressRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceInfoAddress != null">
+        service_info_address = #{record.serviceInfoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceInfoPerson != null">
+        service_info_person = #{record.serviceInfoPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceInfoPhone != null">
+        service_info_phone = #{record.serviceInfoPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zipCode != null">
+        zip_code = #{record.zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultFlag != null">
+        default_flag = #{record.defaultFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_order_service_info
+    set id = #{record.id,jdbcType=INTEGER},
+      service_info_id = #{record.serviceInfoId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      address_province = #{record.addressProvince,jdbcType=VARCHAR},
+      address_city = #{record.addressCity,jdbcType=VARCHAR},
+      address_region = #{record.addressRegion,jdbcType=VARCHAR},
+      service_info_address = #{record.serviceInfoAddress,jdbcType=VARCHAR},
+      service_info_person = #{record.serviceInfoPerson,jdbcType=VARCHAR},
+      service_info_phone = #{record.serviceInfoPhone,jdbcType=VARCHAR},
+      zip_code = #{record.zipCode,jdbcType=VARCHAR},
+      default_flag = #{record.defaultFlag,jdbcType=INTEGER},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tclab.weixinappletservice.pojo.AppletOrderServiceInfo">
+    update applet_order_service_info
+    <set>
+      <if test="serviceInfoId != null">
+        service_info_id = #{serviceInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="addressProvince != null">
+        address_province = #{addressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCity != null">
+        address_city = #{addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressRegion != null">
+        address_region = #{addressRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceInfoAddress != null">
+        service_info_address = #{serviceInfoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceInfoPerson != null">
+        service_info_person = #{serviceInfoPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceInfoPhone != null">
+        service_info_phone = #{serviceInfoPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        zip_code = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultFlag != null">
+        default_flag = #{defaultFlag,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tclab.weixinappletservice.pojo.AppletOrderServiceInfo">
+    update applet_order_service_info
+    set service_info_id = #{serviceInfoId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      address_province = #{addressProvince,jdbcType=VARCHAR},
+      address_city = #{addressCity,jdbcType=VARCHAR},
+      address_region = #{addressRegion,jdbcType=VARCHAR},
+      service_info_address = #{serviceInfoAddress,jdbcType=VARCHAR},
+      service_info_person = #{serviceInfoPerson,jdbcType=VARCHAR},
+      service_info_phone = #{serviceInfoPhone,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      default_flag = #{defaultFlag,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

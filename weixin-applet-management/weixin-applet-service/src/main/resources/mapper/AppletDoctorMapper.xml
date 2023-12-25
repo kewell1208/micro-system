@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletDoctorMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletDoctor">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="doctor_id" jdbcType="VARCHAR" property="doctorId" />
+    <result column="doctor_name" jdbcType="VARCHAR" property="doctorName" />
+    <result column="doctor_sex" jdbcType="VARCHAR" property="doctorSex" />
+    <result column="doctor_phone" jdbcType="VARCHAR" property="doctorPhone" />
+    <result column="doctor_id_card" jdbcType="VARCHAR" property="doctorIdCard" />
+    <result column="hospital_id" jdbcType="VARCHAR" property="hospitalId" />
+    <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
+    <result column="doctor_department_id" jdbcType="VARCHAR" property="doctorDepartmentId" />
+    <result column="doctor_department_name" jdbcType="VARCHAR" property="doctorDepartmentName" />
+    <result column="doctor_type" jdbcType="INTEGER" property="doctorType" />
+    <result column="doctor_rank" jdbcType="VARCHAR" property="doctorRank" />
+    <result column="doctor_rank_image" jdbcType="VARCHAR" property="doctorRankImage" />
+    <result column="doctor_job_image" jdbcType="VARCHAR" property="doctorJobImage" />
+    <result column="doctor_introduction" jdbcType="VARCHAR" property="doctorIntroduction" />
+    <result column="doctor_expert" jdbcType="VARCHAR" property="doctorExpert" />
+    <result column="doctor_remark" jdbcType="VARCHAR" property="doctorRemark" />
+    <result column="verify_flag" jdbcType="INTEGER" property="verifyFlag" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="doctor_status" jdbcType="INTEGER" property="doctorStatus" />
+    <result column="doctor_score" jdbcType="DOUBLE" property="doctorScore" />
+    <result column="doctor_logo" jdbcType="VARCHAR" property="doctorLogo" />
+    <result column="doctor_inquiry_price" jdbcType="DECIMAL" property="doctorInquiryPrice" />
+    <result column="doctor_inquiry_image_price" jdbcType="DECIMAL" property="doctorInquiryImagePrice" />
+    <result column="doctor_inquiry_phone_price" jdbcType="DECIMAL" property="doctorInquiryPhonePrice" />
+    <result column="doctor_inquiry_count" jdbcType="INTEGER" property="doctorInquiryCount" />
+    <result column="doctor_interpret_price" jdbcType="DECIMAL" property="doctorInterpretPrice" />
+    <result column="doctor_interpret_count" jdbcType="INTEGER" property="doctorInterpretCount" />
+    <result column="doctor_label" jdbcType="VARCHAR" property="doctorLabel" />
+    <result column="doctor_QRcode" jdbcType="VARCHAR" property="doctorQrcode" />
+    <result column="doctor_uuid" jdbcType="VARCHAR" property="doctorUuid" />
+    <result column="doctor_openid" jdbcType="VARCHAR" property="doctorOpenid" />
+    <result column="doctor_password" jdbcType="VARCHAR" property="doctorPassword" />
+    <result column="doctor_authority" jdbcType="INTEGER" property="doctorAuthority" />
+    <result column="doctor_order_credentials" jdbcType="INTEGER" property="doctorOrderCredentials" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, doctor_id, doctor_name, doctor_sex, doctor_phone, doctor_id_card, hospital_id, 
+    hospital_name, doctor_department_id, doctor_department_name, doctor_type, doctor_rank, 
+    doctor_rank_image, doctor_job_image, doctor_introduction, doctor_expert, doctor_remark, 
+    verify_flag, del_flag, create_date, update_date, doctor_status, doctor_score, doctor_logo, 
+    doctor_inquiry_price, doctor_inquiry_image_price, doctor_inquiry_phone_price, doctor_inquiry_count, 
+    doctor_interpret_price, doctor_interpret_count, doctor_label, doctor_QRcode, doctor_uuid, 
+    doctor_openid, doctor_password, doctor_authority, doctor_order_credentials
+  </sql>
+  <select id="selectByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletDoctorExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from applet_doctor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applet_doctor
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_doctor
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletDoctorExample">
+    delete from applet_doctor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletDoctor">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_doctor (doctor_id, doctor_name, doctor_sex, 
+      doctor_phone, doctor_id_card, hospital_id, 
+      hospital_name, doctor_department_id, doctor_department_name, 
+      doctor_type, doctor_rank, doctor_rank_image, 
+      doctor_job_image, doctor_introduction, doctor_expert, 
+      doctor_remark, verify_flag, del_flag, 
+      create_date, update_date, doctor_status, 
+      doctor_score, doctor_logo, doctor_inquiry_price, 
+      doctor_inquiry_image_price, doctor_inquiry_phone_price, 
+      doctor_inquiry_count, doctor_interpret_price, 
+      doctor_interpret_count, doctor_label, doctor_QRcode, 
+      doctor_uuid, doctor_openid, doctor_password, 
+      doctor_authority, doctor_order_credentials
+      )
+    values (#{doctorId,jdbcType=VARCHAR}, #{doctorName,jdbcType=VARCHAR}, #{doctorSex,jdbcType=VARCHAR}, 
+      #{doctorPhone,jdbcType=VARCHAR}, #{doctorIdCard,jdbcType=VARCHAR}, #{hospitalId,jdbcType=VARCHAR}, 
+      #{hospitalName,jdbcType=VARCHAR}, #{doctorDepartmentId,jdbcType=VARCHAR}, #{doctorDepartmentName,jdbcType=VARCHAR}, 
+      #{doctorType,jdbcType=INTEGER}, #{doctorRank,jdbcType=VARCHAR}, #{doctorRankImage,jdbcType=VARCHAR}, 
+      #{doctorJobImage,jdbcType=VARCHAR}, #{doctorIntroduction,jdbcType=VARCHAR}, #{doctorExpert,jdbcType=VARCHAR}, 
+      #{doctorRemark,jdbcType=VARCHAR}, #{verifyFlag,jdbcType=INTEGER}, #{delFlag,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{doctorStatus,jdbcType=INTEGER}, 
+      #{doctorScore,jdbcType=DOUBLE}, #{doctorLogo,jdbcType=VARCHAR}, #{doctorInquiryPrice,jdbcType=DECIMAL}, 
+      #{doctorInquiryImagePrice,jdbcType=DECIMAL}, #{doctorInquiryPhonePrice,jdbcType=DECIMAL}, 
+      #{doctorInquiryCount,jdbcType=INTEGER}, #{doctorInterpretPrice,jdbcType=DECIMAL}, 
+      #{doctorInterpretCount,jdbcType=INTEGER}, #{doctorLabel,jdbcType=VARCHAR}, #{doctorQrcode,jdbcType=VARCHAR}, 
+      #{doctorUuid,jdbcType=VARCHAR}, #{doctorOpenid,jdbcType=VARCHAR}, #{doctorPassword,jdbcType=VARCHAR}, 
+      #{doctorAuthority,jdbcType=INTEGER}, #{doctorOrderCredentials,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tclab.weixinappletservice.pojo.AppletDoctor">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_doctor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="doctorId != null">
+        doctor_id,
+      </if>
+      <if test="doctorName != null">
+        doctor_name,
+      </if>
+      <if test="doctorSex != null">
+        doctor_sex,
+      </if>
+      <if test="doctorPhone != null">
+        doctor_phone,
+      </if>
+      <if test="doctorIdCard != null">
+        doctor_id_card,
+      </if>
+      <if test="hospitalId != null">
+        hospital_id,
+      </if>
+      <if test="hospitalName != null">
+        hospital_name,
+      </if>
+      <if test="doctorDepartmentId != null">
+        doctor_department_id,
+      </if>
+      <if test="doctorDepartmentName != null">
+        doctor_department_name,
+      </if>
+      <if test="doctorType != null">
+        doctor_type,
+      </if>
+      <if test="doctorRank != null">
+        doctor_rank,
+      </if>
+      <if test="doctorRankImage != null">
+        doctor_rank_image,
+      </if>
+      <if test="doctorJobImage != null">
+        doctor_job_image,
+      </if>
+      <if test="doctorIntroduction != null">
+        doctor_introduction,
+      </if>
+      <if test="doctorExpert != null">
+        doctor_expert,
+      </if>
+      <if test="doctorRemark != null">
+        doctor_remark,
+      </if>
+      <if test="verifyFlag != null">
+        verify_flag,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="doctorStatus != null">
+        doctor_status,
+      </if>
+      <if test="doctorScore != null">
+        doctor_score,
+      </if>
+      <if test="doctorLogo != null">
+        doctor_logo,
+      </if>
+      <if test="doctorInquiryPrice != null">
+        doctor_inquiry_price,
+      </if>
+      <if test="doctorInquiryImagePrice != null">
+        doctor_inquiry_image_price,
+      </if>
+      <if test="doctorInquiryPhonePrice != null">
+        doctor_inquiry_phone_price,
+      </if>
+      <if test="doctorInquiryCount != null">
+        doctor_inquiry_count,
+      </if>
+      <if test="doctorInterpretPrice != null">
+        doctor_interpret_price,
+      </if>
+      <if test="doctorInterpretCount != null">
+        doctor_interpret_count,
+      </if>
+      <if test="doctorLabel != null">
+        doctor_label,
+      </if>
+      <if test="doctorQrcode != null">
+        doctor_QRcode,
+      </if>
+      <if test="doctorUuid != null">
+        doctor_uuid,
+      </if>
+      <if test="doctorOpenid != null">
+        doctor_openid,
+      </if>
+      <if test="doctorPassword != null">
+        doctor_password,
+      </if>
+      <if test="doctorAuthority != null">
+        doctor_authority,
+      </if>
+      <if test="doctorOrderCredentials != null">
+        doctor_order_credentials,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorName != null">
+        #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorSex != null">
+        #{doctorSex,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorPhone != null">
+        #{doctorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorIdCard != null">
+        #{doctorIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalId != null">
+        #{hospitalId,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalName != null">
+        #{hospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorDepartmentId != null">
+        #{doctorDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorDepartmentName != null">
+        #{doctorDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorType != null">
+        #{doctorType,jdbcType=INTEGER},
+      </if>
+      <if test="doctorRank != null">
+        #{doctorRank,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorRankImage != null">
+        #{doctorRankImage,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorJobImage != null">
+        #{doctorJobImage,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorIntroduction != null">
+        #{doctorIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorExpert != null">
+        #{doctorExpert,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorRemark != null">
+        #{doctorRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyFlag != null">
+        #{verifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doctorStatus != null">
+        #{doctorStatus,jdbcType=INTEGER},
+      </if>
+      <if test="doctorScore != null">
+        #{doctorScore,jdbcType=DOUBLE},
+      </if>
+      <if test="doctorLogo != null">
+        #{doctorLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorInquiryPrice != null">
+        #{doctorInquiryPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="doctorInquiryImagePrice != null">
+        #{doctorInquiryImagePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="doctorInquiryPhonePrice != null">
+        #{doctorInquiryPhonePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="doctorInquiryCount != null">
+        #{doctorInquiryCount,jdbcType=INTEGER},
+      </if>
+      <if test="doctorInterpretPrice != null">
+        #{doctorInterpretPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="doctorInterpretCount != null">
+        #{doctorInterpretCount,jdbcType=INTEGER},
+      </if>
+      <if test="doctorLabel != null">
+        #{doctorLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorQrcode != null">
+        #{doctorQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorUuid != null">
+        #{doctorUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorOpenid != null">
+        #{doctorOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorPassword != null">
+        #{doctorPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorAuthority != null">
+        #{doctorAuthority,jdbcType=INTEGER},
+      </if>
+      <if test="doctorOrderCredentials != null">
+        #{doctorOrderCredentials,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletDoctorExample" resultType="java.lang.Long">
+    select count(*) from applet_doctor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_doctor
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorId != null">
+        doctor_id = #{record.doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorName != null">
+        doctor_name = #{record.doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorSex != null">
+        doctor_sex = #{record.doctorSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorPhone != null">
+        doctor_phone = #{record.doctorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorIdCard != null">
+        doctor_id_card = #{record.doctorIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hospitalId != null">
+        hospital_id = #{record.hospitalId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hospitalName != null">
+        hospital_name = #{record.hospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorDepartmentId != null">
+        doctor_department_id = #{record.doctorDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorDepartmentName != null">
+        doctor_department_name = #{record.doctorDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorType != null">
+        doctor_type = #{record.doctorType,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorRank != null">
+        doctor_rank = #{record.doctorRank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorRankImage != null">
+        doctor_rank_image = #{record.doctorRankImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorJobImage != null">
+        doctor_job_image = #{record.doctorJobImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorIntroduction != null">
+        doctor_introduction = #{record.doctorIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorExpert != null">
+        doctor_expert = #{record.doctorExpert,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorRemark != null">
+        doctor_remark = #{record.doctorRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verifyFlag != null">
+        verify_flag = #{record.verifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.doctorStatus != null">
+        doctor_status = #{record.doctorStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorScore != null">
+        doctor_score = #{record.doctorScore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.doctorLogo != null">
+        doctor_logo = #{record.doctorLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorInquiryPrice != null">
+        doctor_inquiry_price = #{record.doctorInquiryPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.doctorInquiryImagePrice != null">
+        doctor_inquiry_image_price = #{record.doctorInquiryImagePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.doctorInquiryPhonePrice != null">
+        doctor_inquiry_phone_price = #{record.doctorInquiryPhonePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.doctorInquiryCount != null">
+        doctor_inquiry_count = #{record.doctorInquiryCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorInterpretPrice != null">
+        doctor_interpret_price = #{record.doctorInterpretPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.doctorInterpretCount != null">
+        doctor_interpret_count = #{record.doctorInterpretCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorLabel != null">
+        doctor_label = #{record.doctorLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorQrcode != null">
+        doctor_QRcode = #{record.doctorQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorUuid != null">
+        doctor_uuid = #{record.doctorUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorOpenid != null">
+        doctor_openid = #{record.doctorOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorPassword != null">
+        doctor_password = #{record.doctorPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorAuthority != null">
+        doctor_authority = #{record.doctorAuthority,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorOrderCredentials != null">
+        doctor_order_credentials = #{record.doctorOrderCredentials,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_doctor
+    set id = #{record.id,jdbcType=INTEGER},
+      doctor_id = #{record.doctorId,jdbcType=VARCHAR},
+      doctor_name = #{record.doctorName,jdbcType=VARCHAR},
+      doctor_sex = #{record.doctorSex,jdbcType=VARCHAR},
+      doctor_phone = #{record.doctorPhone,jdbcType=VARCHAR},
+      doctor_id_card = #{record.doctorIdCard,jdbcType=VARCHAR},
+      hospital_id = #{record.hospitalId,jdbcType=VARCHAR},
+      hospital_name = #{record.hospitalName,jdbcType=VARCHAR},
+      doctor_department_id = #{record.doctorDepartmentId,jdbcType=VARCHAR},
+      doctor_department_name = #{record.doctorDepartmentName,jdbcType=VARCHAR},
+      doctor_type = #{record.doctorType,jdbcType=INTEGER},
+      doctor_rank = #{record.doctorRank,jdbcType=VARCHAR},
+      doctor_rank_image = #{record.doctorRankImage,jdbcType=VARCHAR},
+      doctor_job_image = #{record.doctorJobImage,jdbcType=VARCHAR},
+      doctor_introduction = #{record.doctorIntroduction,jdbcType=VARCHAR},
+      doctor_expert = #{record.doctorExpert,jdbcType=VARCHAR},
+      doctor_remark = #{record.doctorRemark,jdbcType=VARCHAR},
+      verify_flag = #{record.verifyFlag,jdbcType=INTEGER},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      doctor_status = #{record.doctorStatus,jdbcType=INTEGER},
+      doctor_score = #{record.doctorScore,jdbcType=DOUBLE},
+      doctor_logo = #{record.doctorLogo,jdbcType=VARCHAR},
+      doctor_inquiry_price = #{record.doctorInquiryPrice,jdbcType=DECIMAL},
+      doctor_inquiry_image_price = #{record.doctorInquiryImagePrice,jdbcType=DECIMAL},
+      doctor_inquiry_phone_price = #{record.doctorInquiryPhonePrice,jdbcType=DECIMAL},
+      doctor_inquiry_count = #{record.doctorInquiryCount,jdbcType=INTEGER},
+      doctor_interpret_price = #{record.doctorInterpretPrice,jdbcType=DECIMAL},
+      doctor_interpret_count = #{record.doctorInterpretCount,jdbcType=INTEGER},
+      doctor_label = #{record.doctorLabel,jdbcType=VARCHAR},
+      doctor_QRcode = #{record.doctorQrcode,jdbcType=VARCHAR},
+      doctor_uuid = #{record.doctorUuid,jdbcType=VARCHAR},
+      doctor_openid = #{record.doctorOpenid,jdbcType=VARCHAR},
+      doctor_password = #{record.doctorPassword,jdbcType=VARCHAR},
+      doctor_authority = #{record.doctorAuthority,jdbcType=INTEGER},
+      doctor_order_credentials = #{record.doctorOrderCredentials,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tclab.weixinappletservice.pojo.AppletDoctor">
+    update applet_doctor
+    <set>
+      <if test="doctorId != null">
+        doctor_id = #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorName != null">
+        doctor_name = #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorSex != null">
+        doctor_sex = #{doctorSex,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorPhone != null">
+        doctor_phone = #{doctorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorIdCard != null">
+        doctor_id_card = #{doctorIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalId != null">
+        hospital_id = #{hospitalId,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalName != null">
+        hospital_name = #{hospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorDepartmentId != null">
+        doctor_department_id = #{doctorDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorDepartmentName != null">
+        doctor_department_name = #{doctorDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorType != null">
+        doctor_type = #{doctorType,jdbcType=INTEGER},
+      </if>
+      <if test="doctorRank != null">
+        doctor_rank = #{doctorRank,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorRankImage != null">
+        doctor_rank_image = #{doctorRankImage,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorJobImage != null">
+        doctor_job_image = #{doctorJobImage,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorIntroduction != null">
+        doctor_introduction = #{doctorIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorExpert != null">
+        doctor_expert = #{doctorExpert,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorRemark != null">
+        doctor_remark = #{doctorRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyFlag != null">
+        verify_flag = #{verifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doctorStatus != null">
+        doctor_status = #{doctorStatus,jdbcType=INTEGER},
+      </if>
+      <if test="doctorScore != null">
+        doctor_score = #{doctorScore,jdbcType=DOUBLE},
+      </if>
+      <if test="doctorLogo != null">
+        doctor_logo = #{doctorLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorInquiryPrice != null">
+        doctor_inquiry_price = #{doctorInquiryPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="doctorInquiryImagePrice != null">
+        doctor_inquiry_image_price = #{doctorInquiryImagePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="doctorInquiryPhonePrice != null">
+        doctor_inquiry_phone_price = #{doctorInquiryPhonePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="doctorInquiryCount != null">
+        doctor_inquiry_count = #{doctorInquiryCount,jdbcType=INTEGER},
+      </if>
+      <if test="doctorInterpretPrice != null">
+        doctor_interpret_price = #{doctorInterpretPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="doctorInterpretCount != null">
+        doctor_interpret_count = #{doctorInterpretCount,jdbcType=INTEGER},
+      </if>
+      <if test="doctorLabel != null">
+        doctor_label = #{doctorLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorQrcode != null">
+        doctor_QRcode = #{doctorQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorUuid != null">
+        doctor_uuid = #{doctorUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorOpenid != null">
+        doctor_openid = #{doctorOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorPassword != null">
+        doctor_password = #{doctorPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorAuthority != null">
+        doctor_authority = #{doctorAuthority,jdbcType=INTEGER},
+      </if>
+      <if test="doctorOrderCredentials != null">
+        doctor_order_credentials = #{doctorOrderCredentials,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tclab.weixinappletservice.pojo.AppletDoctor">
+    update applet_doctor
+    set doctor_id = #{doctorId,jdbcType=VARCHAR},
+      doctor_name = #{doctorName,jdbcType=VARCHAR},
+      doctor_sex = #{doctorSex,jdbcType=VARCHAR},
+      doctor_phone = #{doctorPhone,jdbcType=VARCHAR},
+      doctor_id_card = #{doctorIdCard,jdbcType=VARCHAR},
+      hospital_id = #{hospitalId,jdbcType=VARCHAR},
+      hospital_name = #{hospitalName,jdbcType=VARCHAR},
+      doctor_department_id = #{doctorDepartmentId,jdbcType=VARCHAR},
+      doctor_department_name = #{doctorDepartmentName,jdbcType=VARCHAR},
+      doctor_type = #{doctorType,jdbcType=INTEGER},
+      doctor_rank = #{doctorRank,jdbcType=VARCHAR},
+      doctor_rank_image = #{doctorRankImage,jdbcType=VARCHAR},
+      doctor_job_image = #{doctorJobImage,jdbcType=VARCHAR},
+      doctor_introduction = #{doctorIntroduction,jdbcType=VARCHAR},
+      doctor_expert = #{doctorExpert,jdbcType=VARCHAR},
+      doctor_remark = #{doctorRemark,jdbcType=VARCHAR},
+      verify_flag = #{verifyFlag,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      doctor_status = #{doctorStatus,jdbcType=INTEGER},
+      doctor_score = #{doctorScore,jdbcType=DOUBLE},
+      doctor_logo = #{doctorLogo,jdbcType=VARCHAR},
+      doctor_inquiry_price = #{doctorInquiryPrice,jdbcType=DECIMAL},
+      doctor_inquiry_image_price = #{doctorInquiryImagePrice,jdbcType=DECIMAL},
+      doctor_inquiry_phone_price = #{doctorInquiryPhonePrice,jdbcType=DECIMAL},
+      doctor_inquiry_count = #{doctorInquiryCount,jdbcType=INTEGER},
+      doctor_interpret_price = #{doctorInterpretPrice,jdbcType=DECIMAL},
+      doctor_interpret_count = #{doctorInterpretCount,jdbcType=INTEGER},
+      doctor_label = #{doctorLabel,jdbcType=VARCHAR},
+      doctor_QRcode = #{doctorQrcode,jdbcType=VARCHAR},
+      doctor_uuid = #{doctorUuid,jdbcType=VARCHAR},
+      doctor_openid = #{doctorOpenid,jdbcType=VARCHAR},
+      doctor_password = #{doctorPassword,jdbcType=VARCHAR},
+      doctor_authority = #{doctorAuthority,jdbcType=INTEGER},
+      doctor_order_credentials = #{doctorOrderCredentials,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectDoctorByParam" parameterType="com.tclab.weixinappletservice.model.query.QueryDoctorParam" resultMap="BaseResultMap">
+    SELECT
+    a.id, a.doctor_id, a.doctor_name, a.doctor_sex, a.doctor_phone, a.doctor_id_card, a.hospital_id,
+    a.doctor_department_id, a.doctor_type, a.doctor_rank, a.doctor_rank_image, a.doctor_job_image,
+    a.doctor_introduction, a.doctor_expert, a.doctor_remark, a.verify_flag, a.del_flag, a.create_date,
+    a.update_date, a.doctor_status, a.doctor_score, a.doctor_logo, a.doctor_inquiry_price, a.doctor_inquiry_image_price,
+    a.doctor_inquiry_phone_price, a.doctor_inquiry_count, a.doctor_interpret_price, a.doctor_interpret_count,
+    a.doctor_label, a.hospital_name, a.doctor_department_name, a.doctor_authority
+    FROM
+    applet_doctor a,applet_doctor_department b
+    WHERE
+    1=1
+    AND
+    a.doctor_department_id = b.doctor_department_id
+    AND
+    a.del_flag = 0
+    <if test="hospitalId != null and hospitalId !=''">
+      AND
+      a.hospital_id = #{hospitalId,jdbcType=VARCHAR}
+    </if>
+    <if test="doctorAuthorityList != null and doctorAuthorityList.size > 0">
+      AND
+      a.doctor_authority
+      IN
+      <foreach collection="doctorAuthorityList" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    <if test="doctorId != null and doctorId !=''">
+      AND
+      a.doctor_id = #{doctorId,jdbcType=VARCHAR}
+    </if>
+    <if test="queryParam != null and queryParam != ''">
+      AND
+      a.doctor_name LIKE CONCAT('%', #{queryParam,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="departmentId != null and departmentId !=''">
+      AND
+      (
+      a.doctor_department_id = #{departmentId,jdbcType=VARCHAR}
+      OR
+      b.pid = #{departmentId,jdbcType=VARCHAR}
+      )
+    </if>
+  </select>
+</mapper>

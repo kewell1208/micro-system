@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tclab.weixinappletservice.dao.AppletBannerMapper">
+  <resultMap id="BaseResultMap" type="com.tclab.weixinappletservice.pojo.AppletBanner">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="banner_id" jdbcType="VARCHAR" property="bannerId" />
+    <result column="banner_field" jdbcType="INTEGER" property="bannerField" />
+    <result column="banner_type" jdbcType="INTEGER" property="bannerType" />
+    <result column="banner_name" jdbcType="VARCHAR" property="bannerName" />
+    <result column="banner_img" jdbcType="VARCHAR" property="bannerImg" />
+    <result column="banner_index" jdbcType="INTEGER" property="bannerIndex" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, banner_id, banner_field, banner_type, banner_name, banner_img, banner_index, 
+    del_flag, create_date, update_date
+  </sql>
+  <select id="selectByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletBannerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from applet_banner
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applet_banner
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applet_banner
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletBannerExample">
+    delete from applet_banner
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tclab.weixinappletservice.pojo.AppletBanner">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_banner (banner_id, banner_field, banner_type, 
+      banner_name, banner_img, banner_index, 
+      del_flag, create_date, update_date
+      )
+    values (#{bannerId,jdbcType=VARCHAR}, #{bannerField,jdbcType=INTEGER}, #{bannerType,jdbcType=INTEGER}, 
+      #{bannerName,jdbcType=VARCHAR}, #{bannerImg,jdbcType=VARCHAR}, #{bannerIndex,jdbcType=INTEGER}, 
+      #{delFlag,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tclab.weixinappletservice.pojo.AppletBanner">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into applet_banner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bannerId != null">
+        banner_id,
+      </if>
+      <if test="bannerField != null">
+        banner_field,
+      </if>
+      <if test="bannerType != null">
+        banner_type,
+      </if>
+      <if test="bannerName != null">
+        banner_name,
+      </if>
+      <if test="bannerImg != null">
+        banner_img,
+      </if>
+      <if test="bannerIndex != null">
+        banner_index,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bannerId != null">
+        #{bannerId,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerField != null">
+        #{bannerField,jdbcType=INTEGER},
+      </if>
+      <if test="bannerType != null">
+        #{bannerType,jdbcType=INTEGER},
+      </if>
+      <if test="bannerName != null">
+        #{bannerName,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerImg != null">
+        #{bannerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerIndex != null">
+        #{bannerIndex,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tclab.weixinappletservice.pojo.AppletBannerExample" resultType="java.lang.Long">
+    select count(*) from applet_banner
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update applet_banner
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bannerId != null">
+        banner_id = #{record.bannerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerField != null">
+        banner_field = #{record.bannerField,jdbcType=INTEGER},
+      </if>
+      <if test="record.bannerType != null">
+        banner_type = #{record.bannerType,jdbcType=INTEGER},
+      </if>
+      <if test="record.bannerName != null">
+        banner_name = #{record.bannerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerImg != null">
+        banner_img = #{record.bannerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerIndex != null">
+        banner_index = #{record.bannerIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update applet_banner
+    set id = #{record.id,jdbcType=INTEGER},
+      banner_id = #{record.bannerId,jdbcType=VARCHAR},
+      banner_field = #{record.bannerField,jdbcType=INTEGER},
+      banner_type = #{record.bannerType,jdbcType=INTEGER},
+      banner_name = #{record.bannerName,jdbcType=VARCHAR},
+      banner_img = #{record.bannerImg,jdbcType=VARCHAR},
+      banner_index = #{record.bannerIndex,jdbcType=INTEGER},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tclab.weixinappletservice.pojo.AppletBanner">
+    update applet_banner
+    <set>
+      <if test="bannerId != null">
+        banner_id = #{bannerId,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerField != null">
+        banner_field = #{bannerField,jdbcType=INTEGER},
+      </if>
+      <if test="bannerType != null">
+        banner_type = #{bannerType,jdbcType=INTEGER},
+      </if>
+      <if test="bannerName != null">
+        banner_name = #{bannerName,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerImg != null">
+        banner_img = #{bannerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerIndex != null">
+        banner_index = #{bannerIndex,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tclab.weixinappletservice.pojo.AppletBanner">
+    update applet_banner
+    set banner_id = #{bannerId,jdbcType=VARCHAR},
+      banner_field = #{bannerField,jdbcType=INTEGER},
+      banner_type = #{bannerType,jdbcType=INTEGER},
+      banner_name = #{bannerName,jdbcType=VARCHAR},
+      banner_img = #{bannerImg,jdbcType=VARCHAR},
+      banner_index = #{bannerIndex,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
